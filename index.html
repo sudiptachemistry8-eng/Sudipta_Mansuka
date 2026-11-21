@@ -1,0 +1,1956 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MANSUKA L. N. HIGH SCHOOL (H.S.) — Exam Seat Finder &amp; Routine 2026</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans Bengali -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- QRCode.js for Instant Scannable QR Code & Notice Board Poster -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans Bengali"', 'sans-serif'],
+            bengali: ['"Noto Sans Bengali"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              950: '#091b42',
+              900: '#0f2b66',
+              800: '#163a84',
+              700: '#1d4ed8',
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Smooth scrolling and subtle custom pulse for highlighted seat */
+    html {
+      scroll-behavior: smooth;
+    }
+    @keyframes seatGlow {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7), 0 4px 14px rgba(245, 158, 11, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 7px rgba(245, 158, 11, 0), 0 6px 20px rgba(245, 158, 11, 0.55);
+      }
+    }
+    .seat-highlight-glow {
+      animation: seatGlow 1.9s infinite ease-in-out;
+    }
+    /* Print-only A4 QR Poster is hidden on screen */
+    #qrPosterPrintArea {
+      display: none;
+    }
+    /* Custom Print Styles for Clean Seat Slip & A4 Notice Board QR Poster */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-avoid {
+        break-inside: avoid;
+      }
+      #seatMapSection {
+        display: none !important;
+      }
+      header {
+        background: #0f2b66 !important;
+        color: #ffffff !important;
+        padding: 14px !important;
+      }
+      /* When printing A4 Notice Board QR Poster, show ONLY the poster */
+      body.print-mode-poster header,
+      body.print-mode-poster main,
+      body.print-mode-poster footer,
+      body.print-mode-poster #shareModal,
+      body.print-mode-poster #floatingShareBtn,
+      body.print-mode-poster #appToast {
+        display: none !important;
+      }
+      body.print-mode-poster #qrPosterPrintArea {
+        display: flex !important;
+        min-height: 96vh;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="bg-gradient-to-br from-[#0f2b66] via-[#13367d] to-[#1d4ed8] text-white shadow-lg">
+    <div class="max-w-5xl mx-auto px-4 py-5 sm:py-6">
+      <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+        <!-- Official School Logo -->
+        <div class="shrink-0 bg-white p-1.5 rounded-2xl shadow-md ring-2 ring-white/30">
+          <img
+            id="schoolLogoImg"
+            src="data:image/webp;base64,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"
+            alt="Mansuka L. N. High School Logo"
+            class="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-xl"
+          />
+        </div>
+        <!-- School Title & Info -->
+        <div class="flex-1 min-w-0">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/15 text-sky-100 text-xs font-semibold tracking-wide mb-1.5">
+            <span>ESTD. 1945</span>
+            <span>•</span>
+            <span class="font-bengali">মনসুকা লক্ষ্মীনারায়ণ উচ্চ বিদ্যালয় (উঃ মাঃ)</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight">
+            MANSUKA L. N. HIGH SCHOOL (H.S.)
+          </h1>
+          <p class="text-sky-200 text-xs sm:text-sm font-medium mt-0.5">
+            Mansuka, Ghatal, Paschim Medinipur
+          </p>
+          <p class="text-amber-300 text-xs sm:text-sm font-bold mt-1 tracking-wide">
+            Annual / 3rd Summative Evaluation – 2026 • Seat Finder &amp; Routine
+          </p>
+        </div>
+        <!-- Header Share App Button -->
+        <div class="no-print shrink-0">
+          <button
+            id="headerShareBtn"
+            type="button"
+            class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md shadow-emerald-950/30 ring-2 ring-white/25 active:scale-95 transition"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            <span>Share App <span class="font-bengali font-semibold text-emerald-50">/ শেয়ার করুন</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-5 sm:py-6 space-y-6">
+
+    <!-- ==================== SEARCH & ROOM BROWSER CARD ==================== -->
+    <section class="no-print bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+      <!-- Mode Tabs -->
+      <div class="grid grid-cols-3 bg-slate-100/80 p-1.5 gap-1 border-b border-slate-200">
+        <button
+          id="tabRollBtn"
+          type="button"
+          class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-[#0f2b66] text-white shadow-sm"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+          <span>Class &amp; Roll <span class="hidden sm:inline font-bengali font-medium text-sky-200">(রোল নং)</span></span>
+        </button>
+        <button
+          id="tabNameBtn"
+          type="button"
+          class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-white hover:text-[#0f2b66]"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+          <span>By Name <span class="hidden sm:inline font-bengali font-medium opacity-80">(নাম)</span></span>
+        </button>
+        <button
+          id="tabRoomsBtn"
+          type="button"
+          class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-white hover:text-[#0f2b66]"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
+          <span>15 Rooms <span class="hidden sm:inline font-bengali font-medium opacity-80">(রুম)</span></span>
+        </button>
+      </div>
+
+      <!-- Panel 1: Class + Section + Roll Search -->
+      <div id="panelRoll" class="p-4 sm:p-5">
+        <div class="mb-3">
+          <h2 class="text-sm sm:text-base font-bold text-[#0f2b66]">
+            Find Your Exam Seat <span class="font-bengali font-semibold text-slate-500">• তোমার সিট খোঁজো</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Select your Class, Section, and enter your Roll Number.</p>
+        </div>
+
+        <form id="rollSearchForm" class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+          <!-- Class Select -->
+          <div class="sm:col-span-3">
+            <label for="classSelect" class="block text-xs font-bold text-slate-700 mb-1">
+              Class <span class="font-bengali font-medium text-slate-500">(শ্রেণি)</span>
+            </label>
+            <select
+              id="classSelect"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:border-[#1d4ed8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+              required
+            >
+              <option value="V">Class V (৫ম)</option>
+              <option value="VI">Class VI (৬ষ্ঠ)</option>
+              <option value="VII">Class VII (৭ম)</option>
+              <option value="VIII">Class VIII (৮ম)</option>
+              <option value="IX">Class IX (৯ম)</option>
+            </select>
+          </div>
+
+          <!-- Section Select -->
+          <div class="sm:col-span-3">
+            <label for="secSelect" class="block text-xs font-bold text-slate-700 mb-1">
+              Section <span class="font-bengali font-medium text-slate-500">(বিভাগ)</span>
+            </label>
+            <select
+              id="secSelect"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:border-[#1d4ed8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+              required
+            >
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <!-- Roll Input -->
+          <div class="sm:col-span-3">
+            <label for="rollInput" class="block text-xs font-bold text-slate-700 mb-1">
+              Roll No. <span class="font-bengali font-medium text-slate-500">(রোল নং)</span>
+            </label>
+            <input
+              id="rollInput"
+              type="number"
+              inputmode="numeric"
+              min="1"
+              max="200"
+              placeholder="e.g. 12"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-[#1d4ed8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+              required
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <div class="sm:col-span-3">
+            <button
+              type="submit"
+              class="w-full rounded-xl bg-gradient-to-r from-[#0f2b66] to-[#1d4ed8] hover:from-[#163a84] hover:to-[#2563eb] text-white font-bold py-2.5 px-4 text-sm shadow-md shadow-blue-900/20 active:scale-[0.98] transition flex items-center justify-center gap-2"
+            >
+              <span>Find My Seat</span>
+              <span class="font-bengali text-xs text-sky-200">/ সিট খুঁজুন</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Status / Duplicate Disambiguation Area -->
+        <div id="rollSearchFeedback" class="mt-3 hidden"></div>
+      </div>
+
+      <!-- Panel 2: Live Name Search -->
+      <div id="panelName" class="p-4 sm:p-5 hidden">
+        <div class="mb-3">
+          <h2 class="text-sm sm:text-base font-bold text-[#0f2b66]">
+            Search by Student Name <span class="font-bengali font-semibold text-slate-500">• নাম দিয়ে খুঁজুন</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Type at least 2 letters of your name (e.g., "Ankita", "Sayan", "Samanta").</p>
+        </div>
+
+        <div class="relative">
+          <div class="relative">
+            <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+            <input
+              id="nameSearchInput"
+              type="text"
+              autocomplete="off"
+              placeholder="Type student name..."
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 pl-10 pr-10 py-3 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-[#1d4ed8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+            />
+            <button
+              id="clearNameBtn"
+              type="button"
+              class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 rounded-lg"
+              aria-label="Clear search"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <!-- Live Suggestions List -->
+          <div id="nameSuggestions" class="mt-2 max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white divide-y divide-slate-100 hidden shadow-sm"></div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Room Browser -->
+      <div id="panelRooms" class="p-4 sm:p-5 hidden">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-[#0f2b66]">
+              Browse All 15 Exam Rooms <span class="font-bengali font-semibold text-slate-500">• সকল পরীক্ষার রুম</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">Tap any room number to view its complete seating floorplan.</p>
+          </div>
+          <span class="text-xs font-semibold bg-blue-50 text-[#1d4ed8] px-2.5 py-1 rounded-full border border-blue-100">
+            Total: 904 Students
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Boys' Rooms -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600">
+                Boys' Rooms <span class="font-bengali font-semibold normal-case text-slate-500">(ছাত্রদের রুম • ৭টি)</span>
+              </h3>
+            </div>
+            <div id="boysRoomBtns" class="grid grid-cols-4 sm:grid-cols-7 gap-2"></div>
+          </div>
+
+          <!-- Girls' Rooms -->
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600">
+                Girls' Rooms <span class="font-bengali font-semibold normal-case text-slate-500">(ছাত্রীদের রুম • ৮টি)</span>
+              </h3>
+            </div>
+            <div id="girlsRoomBtns" class="grid grid-cols-4 sm:grid-cols-8 gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STUDENT SEAT SUMMARY CARD ==================== -->
+    <section id="seatSummarySection" class="hidden print-break-avoid">
+      <div class="bg-white rounded-2xl shadow-md border-2 border-[#1d4ed8]/20 overflow-hidden">
+        <!-- Top Banner -->
+        <div class="bg-gradient-to-r from-[#0f2b66] to-[#1d4ed8] px-4 sm:px-6 py-3.5 text-white flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-400/20 text-emerald-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider text-sky-200 font-bold">Allotted Examination Seat</p>
+              <h2 id="summaryName" class="text-lg sm:text-xl font-extrabold leading-tight">—</h2>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="summaryCategoryBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-white/15 text-white border border-white/20">
+              —
+            </span>
+          </div>
+        </div>
+
+        <!-- Per-Student Easy Share & Print Action Bar -->
+        <div class="no-print bg-slate-50 px-4 sm:px-6 py-2.5 border-b border-slate-200 flex flex-wrap items-center gap-2">
+          <button
+            id="shareSeatWhatsAppBtn"
+            type="button"
+            class="inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm active:scale-95 transition"
+          >
+            <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 24 24"><path d="M12.031 2C6.502 2 2 6.501 2 12.03c0 1.766.461 3.49 1.337 5.012L2 22l5.086-1.334a9.97 9.97 0 004.945 1.304h.004c5.528 0 10.03-4.502 10.03-10.031C22.065 6.501 17.56 2 12.031 2zm5.84 14.283c-.248.698-1.448 1.334-2.01 1.417-.51.076-1.174.108-1.894-.12-.437-.139-.997-.324-1.714-.634-3.014-1.302-4.983-4.339-5.134-4.54-.15-.201-1.225-1.63-1.225-3.11 0-1.48.775-2.208 1.05-2.509.275-.301.6-.376.8-.376.2 0 .4.002.575.01.184.009.431-.07.675.515.25.602.85 2.082.925 2.233.075.15.125.326.025.526-.1.201-.15.326-.3.501-.15.176-.315.392-.45.526-.15.15-.306.313-.131.614.175.301.778 1.284 1.67 2.08 1.148 1.024 2.116 1.341 2.416 1.492.3.15.475.125.65-.075.175-.201.75-.877.95-1.178.2-.301.4-.251.675-.15.275.1 1.75.826 2.05.976.3.15.5.226.575.351.075.125.075.727-.173 1.425z"/></svg>
+            <span class="font-bengali">WhatsApp-এ সিট পাঠান</span>
+          </button>
+          <button
+            id="copySeatLinkBtn"
+            type="button"
+            class="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm active:scale-95 transition"
+          >
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span class="font-bengali">লিংক কপি করুন</span>
+          </button>
+          <button
+            id="printSlipBtn"
+            type="button"
+            class="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm active:scale-95 transition sm:ml-auto"
+          >
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"/></svg>
+            <span class="font-bengali">প্রিন্ট / সেভ স্লিপ</span>
+          </button>
+        </div>
+
+        <!-- Student Meta Strip -->
+        <div class="bg-[#eff6ff] px-4 sm:px-6 py-2.5 border-b border-blue-100 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs sm:text-sm font-semibold text-slate-700">
+          <div>Class: <span id="summaryClass" class="font-extrabold text-[#0f2b66]">—</span></div>
+          <div>Section: <span id="summarySec" class="font-extrabold text-[#0f2b66]">—</span></div>
+          <div>Roll No.: <span id="summaryRoll" class="font-extrabold text-[#0f2b66]">—</span></div>
+          <div class="sm:ml-auto flex items-center gap-1.5 text-emerald-700 font-bold">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Exam Time: <span id="summaryTiming">—</span></span>
+          </div>
+        </div>
+
+        <!-- 4 Highlight Location Boxes -->
+        <div class="p-4 sm:p-5 grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <!-- Room No -->
+          <div class="rounded-2xl bg-gradient-to-br from-[#0f2b66] to-[#1d4ed8] text-white p-3.5 shadow-sm flex flex-col justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-sky-200">Room No. / রুম নং</span>
+            <div id="summaryRoom" class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">—</div>
+          </div>
+
+          <!-- Bench Side -->
+          <div class="rounded-2xl bg-blue-50 border border-blue-200 p-3.5 flex flex-col justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-blue-700">Bench Row / সারি</span>
+            <div id="summarySideEn" class="text-base sm:text-lg font-extrabold text-[#0f2b66] mt-1 leading-snug">—</div>
+            <div id="summarySideBn" class="text-xs font-bengali font-semibold text-blue-700 mt-0.5">—</div>
+          </div>
+
+          <!-- Bench No -->
+          <div class="rounded-2xl bg-emerald-50 border border-emerald-200 p-3.5 flex flex-col justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Bench No. / বেঞ্চ নং</span>
+            <div id="summaryBenchEn" class="text-base sm:text-lg font-extrabold text-emerald-950 mt-1 leading-snug">—</div>
+            <div id="summaryBenchBn" class="text-xs font-bengali font-semibold text-emerald-700 mt-0.5">—</div>
+          </div>
+
+          <!-- Seat Position -->
+          <div class="rounded-2xl bg-amber-50 border border-amber-300 p-3.5 flex flex-col justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-800">Seat Position / সিট</span>
+            <div id="summarySeatEn" class="text-base sm:text-lg font-extrabold text-amber-950 mt-1 leading-snug">—</div>
+            <div id="summarySeatPos" class="text-xs font-semibold text-amber-800 mt-0.5">—</div>
+          </div>
+        </div>
+
+        <!-- Benchmates Mini-Card -->
+        <div class="px-4 sm:px-5 pb-4 sm:pb-5">
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-[#1d4ed8]" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Your Benchmates <span class="font-bengali font-semibold normal-case text-slate-500">(আপনার বেঞ্চের সহপাঠী)</span></span>
+              </h3>
+              <span id="benchCapacityBadge" class="text-[11px] font-bold text-slate-500 bg-white px-2 py-0.5 rounded-full border border-slate-200">—</span>
+            </div>
+            <div id="benchmatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE CLASSROOM POSITION MAP ==================== -->
+    <section id="seatMapSection" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <!-- Map Header -->
+      <div class="px-4 sm:px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 class="text-sm sm:text-base font-extrabold text-[#0f2b66] flex items-center gap-2">
+            <span>Classroom Seat Map — Room <span id="mapRoomTitle" class="text-[#1d4ed8]">—</span></span>
+            <span id="mapCategoryPill" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full">—</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Tap any seat to see student details • <span class="font-bengali">যেকোনো সিটে ট্যাপ করে ছাত্র/ছাত্রীর নাম দেখুন</span>
+          </p>
+        </div>
+        <div class="flex items-center gap-3 text-[11px] font-bold text-slate-600">
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-amber-400 ring-2 ring-amber-500"></span> Your Seat
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-blue-100 border border-blue-300"></span> Occupied
+          </span>
+        </div>
+      </div>
+
+      <!-- Floorplan Container -->
+      <div class="p-3 sm:p-5 bg-gradient-to-b from-slate-50/70 to-white">
+        <!-- Blackboard / Teacher's Desk -->
+        <div class="max-w-lg mx-auto mb-5">
+          <div class="bg-slate-800 text-white rounded-xl py-2.5 px-4 text-center shadow-md border-b-4 border-emerald-500">
+            <div class="text-xs sm:text-sm font-extrabold tracking-widest uppercase">
+              BLACKBOARD / TEACHER'S DESK
+            </div>
+            <div class="text-[11px] sm:text-xs font-bengali text-emerald-300 font-medium mt-0.5">
+              ব্ল্যাকবোর্ড / শিক্ষক-শিক্ষিকার টেবিল (সামনের দিক)
+            </div>
+          </div>
+          <div class="flex justify-center mt-1">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">▼ Front of Classroom ▼</span>
+          </div>
+        </div>
+
+        <!-- Column Headers -->
+        <div class="grid grid-cols-[1fr_24px_1fr] sm:grid-cols-[1fr_44px_1fr] gap-1 sm:gap-2 mb-2.5 items-center text-center">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl py-1.5 px-2">
+            <div class="text-[11px] sm:text-xs font-extrabold text-[#0f2b66] uppercase">Left Bench Row</div>
+            <div class="text-[10px] sm:text-xs font-bengali font-semibold text-blue-700">বাম সারি</div>
+          </div>
+          <div class="text-[9px] sm:text-[10px] font-extrabold text-slate-400 uppercase tracking-tighter">
+            Aisle
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-xl py-1.5 px-2">
+            <div class="text-[11px] sm:text-xs font-extrabold text-[#0f2b66] uppercase">Right Bench Row</div>
+            <div class="text-[10px] sm:text-xs font-bengali font-semibold text-blue-700">ডান সারি</div>
+          </div>
+        </div>
+
+        <!-- Dynamic Benches Grid -->
+        <div id="classroomGrid" class="space-y-2.5"></div>
+
+        <!-- Back of Classroom label -->
+        <div class="mt-4 text-center">
+          <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
+            Back of Classroom • পিছনের দিক
+          </span>
+        </div>
+      </div>
+
+      <!-- Clicked Seat Inspector Bar -->
+      <div id="seatInspectorBar" class="hidden border-t border-slate-200 bg-[#eff6ff] px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <div id="inspectorRollBadge" class="w-10 h-10 rounded-xl bg-[#0f2b66] text-white font-extrabold text-sm flex items-center justify-center shrink-0">—</div>
+          <div class="min-w-0">
+            <div id="inspectorName" class="text-sm font-extrabold text-[#0f2b66] truncate">—</div>
+            <div id="inspectorMeta" class="text-xs font-semibold text-slate-600">—</div>
+          </div>
+        </div>
+        <button
+          id="inspectorSelectBtn"
+          type="button"
+          class="text-xs font-bold bg-[#1d4ed8] hover:bg-[#0f2b66] text-white px-3.5 py-2 rounded-xl transition shrink-0"
+        >
+          View Full Seat &amp; Routine
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== EXAM ROUTINE SECTION ==================== -->
+    <section id="routineSection" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-break-avoid">
+      <!-- Routine Header -->
+      <div class="bg-gradient-to-r from-[#0f2b66] to-[#1d4ed8] px-4 sm:px-6 py-4 text-white">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-sky-200">
+              Examination Schedule • <span class="font-bengali">পরীক্ষার রুটিন</span>
+            </p>
+            <h2 class="text-base sm:text-lg font-extrabold leading-snug">
+              Programme for Annual / 3rd Summative Evaluation – 2026
+            </h2>
+          </div>
+
+          <!-- Toggle: My Class vs All Classes -->
+          <div class="no-print inline-flex bg-white/15 p-1 rounded-xl self-start sm:self-auto">
+            <button
+              id="routineModeClassBtn"
+              type="button"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#0f2b66] shadow-sm"
+            >
+              Class Routine
+            </button>
+            <button
+              id="routineModeAllBtn"
+              type="button"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold transition text-white hover:bg-white/10"
+            >
+              Full School (V–IX)
+            </button>
+          </div>
+        </div>
+
+        <!-- Class Selector Pills (Visible in single-class mode) -->
+        <div id="routineClassPills" class="no-print flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-white/15">
+          <button type="button" data-rclass="V" class="rclass-pill px-3 py-1 rounded-full text-xs font-bold transition">Class V</button>
+          <button type="button" data-rclass="VI" class="rclass-pill px-3 py-1 rounded-full text-xs font-bold transition">Class VI</button>
+          <button type="button" data-rclass="VII" class="rclass-pill px-3 py-1 rounded-full text-xs font-bold transition">Class VII</button>
+          <button type="button" data-rclass="VIII" class="rclass-pill px-3 py-1 rounded-full text-xs font-bold transition">Class VIII</button>
+          <button type="button" data-rclass="IX" class="rclass-pill px-3 py-1 rounded-full text-xs font-bold transition">Class IX</button>
+        </div>
+      </div>
+
+      <!-- Examination Timings Banner -->
+      <div class="bg-[#eff6ff] border-b border-blue-100 px-4 sm:px-6 py-3">
+        <div class="text-[11px] font-extrabold uppercase tracking-wider text-[#0f2b66] mb-1.5 flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-[#1d4ed8]" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Examination Timings • <span class="font-bengali font-semibold">পরীক্ষার সময়সূচি</span></span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+          <div id="timingCardV" class="rounded-xl bg-white border border-blue-200/80 px-3 py-2 flex items-center justify-between">
+            <span class="font-extrabold text-[#0f2b66]">CLASS V</span>
+            <span class="font-bold text-slate-700">11:30 AM – 1:10 PM</span>
+          </div>
+          <div id="timingCardVI_VIII" class="rounded-xl bg-white border border-blue-200/80 px-3 py-2 flex items-center justify-between">
+            <span class="font-extrabold text-[#0f2b66]">CLASSES VI – VIII</span>
+            <span class="font-bold text-slate-700">11:30 AM – 2:00 PM</span>
+          </div>
+          <div id="timingCardIX" class="rounded-xl bg-white border border-blue-200/80 px-3 py-2 flex items-center justify-between">
+            <span class="font-extrabold text-[#0f2b66]">CLASS IX</span>
+            <span class="font-bold text-slate-700">11:30 AM – 2:30 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Routine Table Container -->
+      <div id="routineContent" class="p-4 sm:p-5"></div>
+
+      <!-- Wishing Footer Banner -->
+      <div class="bg-[#0f2b66] text-white text-center px-4 py-3.5">
+        <p class="text-xs sm:text-sm font-extrabold tracking-wide">WISHING ALL STUDENTS THE VERY BEST!</p>
+        <p class="text-[11px] sm:text-xs text-sky-200 font-medium mt-0.5">Prepare well • Be punctual • Do your best</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="no-print text-center text-xs text-slate-400 py-5 px-4 pb-20 sm:pb-6">
+    &copy; 2026 Mansuka L. N. High School (H.S.), Mansuka, Ghatal, Paschim Medinipur.
+  </footer>
+
+  <!-- ==================== FLOATING SHARE BUTTON (MOBILE + DESKTOP) ==================== -->
+  <button
+    id="floatingShareBtn"
+    type="button"
+    class="no-print fixed bottom-4 right-4 z-40 inline-flex items-center gap-2 bg-gradient-to-r from-[#0f2b66] to-[#1d4ed8] hover:from-[#163a84] hover:to-[#2563eb] text-white font-extrabold text-xs sm:text-sm px-4 py-3 rounded-full shadow-xl shadow-blue-900/35 ring-2 ring-white active:scale-95 transition"
+    aria-label="Share App"
+  >
+    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+    <span class="font-bengali">শেয়ার / QR</span>
+  </button>
+
+  <!-- ==================== SHARE APP & QR POSTER MODAL ==================== -->
+  <div
+    id="shareModal"
+    class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/65 backdrop-blur-xs p-3 sm:p-4 overflow-y-auto"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="shareModalTitle"
+  >
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-auto">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-[#0f2b66] to-[#1d4ed8] text-white px-5 py-4 flex items-center justify-between gap-3">
+        <div>
+          <h3 id="shareModalTitle" class="text-base sm:text-lg font-extrabold leading-tight">
+            Share Seat Finder App <span class="font-bengali font-semibold text-sky-200">• শেয়ার করুন</span>
+          </h3>
+          <p class="text-xs text-sky-100 mt-0.5">WhatsApp, Direct Link &amp; Printable A4 Notice Board QR Poster</p>
+        </div>
+        <button
+          id="closeShareModalBtn"
+          type="button"
+          class="p-2 rounded-xl bg-white/15 hover:bg-white/25 text-white transition"
+          aria-label="Close Share Modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="grid grid-cols-2 bg-slate-100 p-1.5 gap-1 border-b border-slate-200">
+        <button
+          id="shareTabLinksBtn"
+          type="button"
+          class="py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition bg-[#0f2b66] text-white shadow-sm"
+        >
+          WhatsApp &amp; Link <span class="font-bengali font-medium text-sky-200">(লিংক)</span>
+        </button>
+        <button
+          id="shareTabQrBtn"
+          type="button"
+          class="py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition text-slate-600 hover:bg-white hover:text-[#0f2b66]"
+        >
+          QR Code &amp; Poster <span class="font-bengali font-medium opacity-80">(পোস্টার)</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-4 sm:p-5 space-y-4">
+        <!-- Editable App URL Input (Always accessible for teachers hosting on Netlify/GitHub/Bitly) -->
+        <div>
+          <label for="shareUrlInput" class="block text-xs font-extrabold text-slate-700 mb-1">
+            Web App Link / URL <span class="font-bengali font-medium text-slate-500">(হোস্ট করা লিংক থাকলে এখানে পেস্ট করুন)</span>
+          </label>
+          <div class="flex gap-2">
+            <input
+              id="shareUrlInput"
+              type="url"
+              placeholder="https://your-school-seatfinder.netlify.app"
+              class="flex-1 min-w-0 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs sm:text-sm font-semibold text-slate-800 focus:border-[#1d4ed8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+            />
+            <button
+              id="modalCopyLinkBtn"
+              type="button"
+              class="shrink-0 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3.5 py-2 transition active:scale-95"
+            >
+              Copy
+            </button>
+          </div>
+          <p id="localFileHint" class="hidden text-[11px] text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-2.5 py-1.5 mt-2 font-medium font-bengali">
+            টিপস: ফাইলটি অনলাইনে (যেমন Netlify Drop বা GitHub Pages) আপলোড করে সেই লিংকটি উপরে পেস্ট করলে QR কোড ও WhatsApp লিংক যেকোনো মোবাইলে কাজ করবে।
+          </p>
+        </div>
+
+        <!-- Tab 1: WhatsApp & Native Share -->
+        <div id="sharePanelLinks" class="space-y-3">
+          <button
+            id="modalWhatsAppBtn"
+            type="button"
+            class="w-full rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-extrabold py-3 px-4 text-sm shadow-md shadow-emerald-600/20 active:scale-[0.98] transition flex items-center justify-center gap-2.5"
+          >
+            <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.031 2C6.502 2 2 6.501 2 12.03c0 1.766.461 3.49 1.337 5.012L2 22l5.086-1.334a9.97 9.97 0 004.945 1.304h.004c5.528 0 10.03-4.502 10.03-10.031C22.065 6.501 17.56 2 12.031 2zm5.84 14.283c-.248.698-1.448 1.334-2.01 1.417-.51.076-1.174.108-1.894-.12-.437-.139-.997-.324-1.714-.634-3.014-1.302-4.983-4.339-5.134-4.54-.15-.201-1.225-1.63-1.225-3.11 0-1.48.775-2.208 1.05-2.509.275-.301.6-.376.8-.376.2 0 .4.002.575.01.184.009.431-.07.675.515.25.602.85 2.082.925 2.233.075.15.125.326.025.526-.1.201-.15.326-.3.501-.15.176-.315.392-.45.526-.15.15-.306.313-.131.614.175.301.778 1.284 1.67 2.08 1.148 1.024 2.116 1.341 2.416 1.492.3.15.475.125.65-.075.175-.201.75-.877.95-1.178.2-.301.4-.251.675-.15.275.1 1.75.826 2.05.976.3.15.5.226.575.351.075.125.075.727-.173 1.425z"/></svg>
+            <span class="font-bengali">WhatsApp-এ শেয়ার করুন</span>
+          </button>
+
+          <button
+            id="modalNativeShareBtn"
+            type="button"
+            class="w-full rounded-xl bg-gradient-to-r from-[#0f2b66] to-[#1d4ed8] hover:from-[#163a84] hover:to-[#2563eb] text-white font-extrabold py-3 px-4 text-sm shadow-md active:scale-[0.98] transition flex items-center justify-center gap-2"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            <span>More Share Options <span class="font-bengali font-semibold text-sky-200">(Telegram / SMS / Facebook)</span></span>
+          </button>
+
+          <button
+            id="modalCopyMessageBtn"
+            type="button"
+            class="w-full rounded-xl bg-blue-50 hover:bg-blue-100 text-[#0f2b66] border border-blue-200 font-bold py-2.5 px-4 text-xs sm:text-sm transition active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            <span class="font-bengali">সম্পূর্ণ নোটিশ মেসেজ কপি করুন (স্কুল গ্রুপের জন্য)</span>
+          </button>
+        </div>
+
+        <!-- Tab 2: QR Code & Printable A4 Notice Board Poster -->
+        <div id="sharePanelQr" class="hidden space-y-4">
+          <div class="flex flex-col items-center justify-center bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <div id="modalQrContainer" class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex items-center justify-center min-w-[184px] min-h-[184px]"></div>
+            <p class="text-xs font-bold text-[#0f2b66] mt-3 text-center font-bengali">
+              মোবাইলে QR কোড স্ক্যান করে নিজের রুম, বেঞ্চ ও পরীক্ষার রুটিন দেখে নাও
+            </p>
+            <p class="text-[11px] text-slate-500 mt-0.5 text-center">
+              Scan with any phone camera to open the Seat Finder
+            </p>
+          </div>
+
+          <button
+            id="printQrPosterBtn"
+            type="button"
+            class="w-full rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-3 px-4 text-sm shadow-md active:scale-[0.98] transition flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"/></svg>
+            <span class="font-bengali">নোটিশ বোর্ড পোস্টার প্রিন্ট (A4 Poster)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PRINTABLE A4 NOTICE BOARD QR POSTER ==================== -->
+  <section id="qrPosterPrintArea" class="flex-col items-center justify-between p-8 bg-white text-slate-900 border-[6px] border-[#0f2b66] rounded-3xl max-w-[210mm] mx-auto">
+    <!-- Top Branding -->
+    <div class="text-center w-full border-b-2 border-[#0f2b66]/20 pb-5">
+      <div class="flex justify-center mb-3">
+        <img id="posterLogoImg" src="" alt="School Logo" class="w-24 h-24 object-contain" />
+      </div>
+      <p class="text-sm font-bengali font-bold text-[#1d4ed8]">মনসুকা লক্ষ্মীনারায়ণ উচ্চ বিদ্যালয় (উঃ মাঃ) • স্থাপিত ১৯৪৫</p>
+      <h1 class="text-3xl font-extrabold text-[#0f2b66] tracking-tight mt-1">MANSUKA L. N. HIGH SCHOOL (H.S.)</h1>
+      <p class="text-sm font-semibold text-slate-600 mt-0.5">Mansuka, Ghatal, Paschim Medinipur</p>
+      <div class="mt-3 inline-block bg-[#0f2b66] text-white px-5 py-1.5 rounded-full text-sm font-extrabold tracking-wide">
+        ANNUAL / 3RD SUMMATIVE EVALUATION – 2026
+      </div>
+    </div>
+
+    <!-- Center QR Code -->
+    <div class="my-6 flex flex-col items-center text-center">
+      <h2 class="text-2xl font-extrabold text-[#0f2b66] mb-1">EXAMINATION SEAT FINDER &amp; ROUTINE</h2>
+      <p class="text-lg font-bengali font-bold text-emerald-700 mb-5">
+        মোবাইলে QR কোড স্ক্যান করে নিজের রুম, বেঞ্চ ও পরীক্ষার রুটিন দেখে নাও
+      </p>
+      <div class="p-5 bg-white border-4 border-[#1d4ed8] rounded-3xl shadow-md">
+        <div id="posterQrContainer" class="flex items-center justify-center min-w-[260px] min-h-[260px]"></div>
+      </div>
+      <div class="mt-4 bg-slate-100 border border-slate-300 rounded-xl px-4 py-2 max-w-md break-all">
+        <span class="text-[11px] font-bold uppercase text-slate-500 block">Direct Link:</span>
+        <span id="posterUrlText" class="text-xs font-extrabold text-[#0f2b66]">—</span>
+      </div>
+    </div>
+
+    <!-- Steps Footer -->
+    <div class="w-full bg-[#eff6ff] border border-blue-200 rounded-2xl p-4 text-center">
+      <div class="grid grid-cols-3 gap-3 text-xs font-bengali font-bold text-[#0f2b66]">
+        <div>১. মোবাইলের ক্যামেরা বা Scanner দিয়ে QR স্ক্যান করো</div>
+        <div>২. নিজের শ্রেণি, বিভাগ ও রোল নম্বর অথবা নাম দাও</div>
+        <div>৩. রুম নং, বেঞ্চের অবস্থান ও পরীক্ষার রুটিন দেখে নাও</div>
+      </div>
+      <p class="text-xs font-extrabold text-slate-600 mt-3 pt-2 border-t border-blue-200">
+        Classes V – IX • All 15 Examination Rooms • Wishing All Students The Very Best!
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div
+    id="appToast"
+    class="no-print fixed bottom-20 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2 bg-slate-900 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-full shadow-xl border border-white/15"
+    role="status"
+    aria-live="polite"
+  >
+    <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+    <span id="appToastMsg" class="font-bengali">কপি হয়েছে!</span>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // =========================================================================
+      // 1. COMPLETE SEATING DATASET (ALL 15 ROOMS, 904 STUDENTS)
+      // Format per entry: SIDE,BENCH_NUM,SEAT_NUM,ROLL,NAME,CLASS,SEC
+      // =========================================================================
+      const RAW_SEATING_DATA = {"3.4":{"c":"B","l":14,"r":13,"s":"L,1,1,3,SWARNADIP MAJI,VI,A;L,1,2,7,SOUMEN GHOSH,VII,A;L,1,3,2,PRINCE BHATTACHARYA,V,A;L,1,4,5,SUJAN SAMANTA,VI,A;R,1,1,27,ANSHU POREY,VI,A;R,1,2,20,DEBRAJ SAMANTA,VII,A;R,1,3,16,SARNIK BERA,V,A;R,1,4,28,SOUVIK SAMANTA,VI,A;L,2,1,67,SOUMEN DOLAI,VIII,C;L,2,2,93,PIJUSH GOSWAMI,IX,B;L,2,3,67,AKASH DOLUI,VIII,A;R,2,1,34,SOUMODIP POREY,IX,A;R,2,2,31,PRITHWIRAJ SATICK,VIII,A;R,2,3,36,UMESH MAJI,IX,A;L,3,1,6,AYUSH RONG,VI,A;L,3,2,10,KIYASH SASMAL,VII,A;L,3,3,4,PRABIN SAMANTA,V,A;L,3,4,7,PRITAM SANTRA,VI,A;R,3,1,29,ANIKET BERA,VI,A;R,3,2,21,SAYAN KAR.,VII,A;R,3,3,17,ANKUSH ROY,V,A;R,3,4,31,SANTANU KOTAL,VI,A;L,4,1,2,RITESH BHAWMICK,VIII,A;L,4,2,5,DEBARGHYA BERA,IX,A;L,4,3,4,ARNAB MANDAL,VIII,A;R,4,1,32,PAPAN MAL,VIII,A;R,4,2,38,RUPAM MANDAL,IX,A;R,4,3,36,DEBAKAR DOLUI,VIII,A;L,5,1,8,ANSHUMAN GHORAI,VI,A;L,5,2,13,SUDIP KARAK,VII,A;L,5,3,6,ADRIJ MONDAL,V,A;L,5,4,10,SOUMALYA HAZRA,VI,A;R,5,1,35,ARANYA KOTAL,VI,A;R,5,2,22,ARGHYA DOLAI,VII,A;R,5,3,18,AUSH BERA,V,A;R,5,4,38,SUDIPTA BHUNIA,VI,A;L,6,1,5,SURAJ KUMAR BHUNIA,VIII,A;L,6,2,15,PRIYANSU BERA,IX,A;L,6,3,8,ARINDAM DOLAI,VIII,A;R,6,1,39,SAYAK PANDIT,IX,A;R,6,2,37,CHANDRA NATH SAMANTA,VIII,A;R,6,3,41,RAJ PATRA,IX,A;L,7,1,13,SOUMYADIP MAJI,VI,A;L,7,2,14,RAGHABENDRA PANJA,VII,A;L,7,3,7,KRISHNAYAN ADAK,V,A;L,7,4,16,ARMAN SAMANTA,VI,A;R,7,1,41,KINGSHUK MALIK,VI,A;R,7,2,26,PRITAM POREY,VII,A;R,7,3,21,SOUGATA CHAKRABORTY,V,A;R,7,4,42,ADITYA SAMANTA,VI,A;L,8,1,19,AYAN SAMANTA,IX,A;L,8,2,14,CHAYAN PAUL,VIII,A;L,8,3,20,DEEP KAR,IX,A;R,8,1,42,SAYAN HAZRA,VIII,A;R,8,2,44,SAMARESH MANNA,IX,A;R,8,3,43,SUMAN SATIK,VIII,A;L,9,1,17,TIRUPATI JANA,VI,A;L,9,2,17,OMKAR SANTRA,VII,A;L,9,3,11,EMAN GHORAI,V,A;L,9,4,18,SOUMADEEP SAMANTA,VI,A;R,9,1,43,ANUPAM MANNA,VI,A;R,9,2,29,SOHAM SAMANTA,VII,A;R,9,3,22,DEEP MISHRA,V,A;R,9,4,44,SUBHA MANDAL,VI,A;L,10,1,16,SOUMYA MAITY,VIII,A;L,10,2,21,DIPTENDU MANNA,IX,A;L,10,3,22,SURAJIT MANNA,VIII,A;R,10,1,45,DEBJIT MONDAL,IX,A;R,10,2,45,RAMESH JANA,VIII,A;R,10,3,48,ADITYA MAJI,IX,A;L,11,1,20,SRIJAN SAMANTA,VI,A;L,11,2,18,SAYANJIT KAR,VII,A;L,11,3,13,BIKAS MANDAL,V,A;L,11,4,22,RIJU PATRA,VI,A;R,11,1,46,SOUMODIP HAZRA,VI,A;R,11,2,30,PIYUSH JANA,VII,A;R,11,3,24,SHIBAM BHUKTA,V,A;R,11,4,50,DIPAK MONDAL,VI,A;L,12,1,25,ADRIJ PAL,IX,A;L,12,2,23,PRANTIK MAJI,VIII,A;L,12,3,26,PRITAM MANDAL,IX,A;R,12,1,46,ANGSHU GHOSH,VIII,A;R,12,2,49,SUSANTA BERA,IX,A;R,12,3,48,AVRA POREY,VIII,A;L,13,1,23,PLABAN CHANAK,VI,A;L,13,2,19,KUNAL BERA,VII,A;L,13,3,14,PRITAM MONDAL,V,A;L,13,4,26,ARAV MAJI,VI,A;R,13,1,53,SIBAM KUNTI,VI,A;R,13,2,31,SOUVIK SATIK,VII,A;R,13,3,29,AYAN BERA,V,A;R,13,4,56,SAMIR KHAN,VI,A;L,14,1,25,ANIKET SAMANTA,VIII,A;L,14,2,29,AYUSH KAR,IX,A;L,14,3,30,ANGSHUMAN BERA,VIII,A"},"1.4":{"c":"B","l":9,"r":8,"s":"L,1,1,57,ANSHU JANA,VI,A;L,1,2,37,SUBRATA SAMANTA,VII,A;L,1,3,30,SAYAN DOLAI,V,A;L,1,4,58,ANKUSH DOLUI,VI,A;R,1,1,66,TUFAN KHAN,IX,A;R,1,2,60,SOUMEN SAU,VIII,A;R,1,3,67,SHRIDHAR ADAK,IX,A;L,2,1,50,SOUMYADIP SAMANTA,IX,A;L,2,2,50,ARJYA SAMANTA,VIII,A;L,2,3,52,AKASH KUNTI,IX,A;R,2,1,52,UTPAL DOLAI,VII,A;R,2,2,7,RAJDIP SATICK,VI,B;R,2,3,35,SUDIPTA CHANAK,V,A;R,2,4,53,DEBDUT DHARA,VII,A;L,3,1,40,AYUSMAN KAR,VII,A;L,3,2,59,AVIJIT DIGAR,VI,A;L,3,3,31,SOUMYADIP PANDIT,V,A;L,3,4,43,SANTANU HAZRA,VII,A;R,3,1,61,SHIBAM KANJI,VIII,A;R,3,2,70,SHANTANU MIDDYA,IX,A;R,3,3,62,SUKANTA SHOW,VIII,A;L,4,1,53,KRISHNA JANA,VIII,A;L,4,2,56,AKASH DHARA,IX,A;L,4,3,54,RITESH HAZRA,VIII,A;R,4,1,9,TRISHANJIT PANJA,VI,B;R,4,2,56,KUSHAN DOLAI,VII,A;R,4,3,38,SWASTIK KHAN,V,A;R,4,4,12,AYUSH BAG,VI,B;L,5,1,60,UJJWAL ADAK,VI,A;L,5,2,46,SUJAN SASMAL,VII,A;L,5,3,32,ARITRA MANDAL,V,A;L,5,4,62,SRIJIT PANJA,VI,A;R,5,1,72,DEEP PATRA,IX,A;R,5,2,63,ROHIT BAG,VIII,A;R,5,3,73,ARNAB KUMAR BAG,IX,A;L,6,1,60,SUMAN DOLAI,IX,A;L,6,2,57,NISITH KAPAT,VIII,A;L,6,3,61,PRITAM BERA,IX,A;R,6,1,60,AVIJIT DOLAI,VII,A;R,6,2,14,SOURIK BERA,VI,B;R,6,3,39,APURBA SAMANTA,V,A;R,6,4,61,SHANTINATH DUTTA,VII,A;L,7,1,47,KRISHNA DIGAR,VII,A;L,7,2,2,SUDIPTA PANDIT,VI,B;L,7,3,33,RAJ MANDAL,V,A;L,7,4,48,RAJDIP CHOWDHURY,VII,A;R,7,1,64,SHIBOM DOLAI,VIII,A;R,7,2,74,RUPAK BAG,IX,A;R,7,3,60,ADWAITYA KHAN,VIII,B;L,8,1,58,RONI SAMANTA,VIII,A;L,8,2,62,CHINMAY DOLAI,IX,A;L,8,3,59,SOUMYADIP KUNTI,VIII,A;R,8,1,15,RAJ KANJI,VI,B;R,8,2,62,JAGANNATH BAR,VII,A;R,8,3,41,RANIT BERA,V,A;R,8,4,17,RANIT SAMANTA,VI,B;L,9,1,5,ANIK MISRA,VI,B;L,9,2,50,RAJDEEP PATRA,VII,A;L,9,3,34,SAYAN HAZRA,V,A;L,9,4,6,RICK BERA,VI,B"},"2.7":{"c":"B","l":8,"r":8,"s":"L,1,1,64,SOUMYAJIT KANDAR,VII,A;L,1,2,18,PRIYOJIT BHUNIA,VI,B;L,1,3,42,KRISHANA DOLAI,V,A;L,1,4,1,SRIJAN MAITY,VII,B;R,1,1,15,ANKIT MAJI,VII,B;R,1,2,32,SWARUP PRAMANIK,VI,B;R,1,3,52,ANKAN SAMANTA,V,A;R,1,4,19,SUJOY KOTAL,VII,B;L,2,1,75,RAHUL DOLAI,IX,A;L,2,2,69,ANKUSH KHAN,VIII,A;L,2,3,76,DIPANKAR DOLAI,IX,A;R,2,1,33,SISIR KARAK,VI,B;R,2,2,20,PIUSE MAJI,VII,B;R,2,3,54,RIK MAITY,V,A;R,2,4,34,AYAN DOLUI,VI,B;L,3,1,20,DEEP MAITY,VI,B;L,3,2,4,ROHAN BERA,VII,B;L,3,3,45,SOUMEN DAS,V,A;L,3,4,26,SUDARSHAN KHAN,VI,B;R,3,1,85,ARGHYA BHOWMIK,IX,A;R,3,2,23,SAYAN POREY,VIII,B;R,3,3,86,KARTICK DOLAI,IX,A;L,4,1,1,SOHAM BERA,VIII,B;L,4,2,77,AVIJIT DOLAI,IX,A;L,4,3,5,SRIJAN ADAK,VIII,B;R,4,1,22,PRAN KRISHNA PARAI,VII,B;R,4,2,35,KRISHNA MANDAL,VI,B;R,4,3,55,SURAJ HAZRA,V,A;R,4,4,23,RAKESH BERA,VII,B;L,5,1,8,SUMIT BERA,VII,B;L,5,2,28,SOUGATA MAITY,VI,B;L,5,3,47,SOUMYAJIT SATIK,V,A;L,5,4,11,ABHIRUP MAJI,VII,B;R,5,1,24,KARTIK SANTRA,VIII,B;R,5,2,89,SOUVIK MONDAL,IX,A;R,5,3,29,SOUMEN BERA,VIII,B;L,6,1,79,BUDHADAB MANDAL,IX,A;L,6,2,9,RUPAM DUARI,VIII,B;L,6,3,82,DEV DOLUI,IX,A;R,6,1,36,SOUMADIP KAR,VI,B;R,6,2,26,RAJDIP PANJA,VII,B;R,6,3,56,PANCHANAN MIDYA,V,A;R,6,4,38,ABIR BERA,VI,B;L,7,1,30,MANATOSH BHUNIA,VI,B;L,7,2,14,SOURAV BHUNIA,VII,B;L,7,3,51,SUMAN BAIRI,V,A;L,7,4,31,ANKUSH DAS,VI,B;R,7,1,90,KOUSIK SHOW,IX,A;R,7,2,31,PANKAJ KANJI,VIII,B;R,7,3,93,PRIYABRATA KUNTI,IX,A;L,8,1,19,SURAJIT SAMANTA,VIII,B;L,8,2,84,ARPAN ADHIKARY,IX,A;L,8,3,20,ARKA BERA,VIII,B;R,8,1,27,ROHIT DOLAI,VII,B;R,8,2,40,SURAJIT MONDAL,VI,B;R,8,3,57,ARITRA DOLAI,V,A;R,8,4,28,SNEHASISH PATRA,VII,B"},"2.5":{"c":"B","l":8,"r":7,"s":"L,1,1,41,SOUMEN GHORAI,VI,B;L,1,2,32,ARANYA PAKHIRA,VII,B;L,1,3,61,ARIAN DAGRA,V,A;L,1,4,44,SOMNATH MAITY,VI,B;R,1,1,53,ASISH PATRA,VI,B;R,1,2,41,AKASH DOLAI,VII,B;R,1,3,67,PRIYANTAN PAL,V,A;R,1,4,54,BISWAJIT PANDIT,VI,B;L,2,1,32,RANAVEER DOLAI,VIII,B;L,2,2,94,SABUJ BARDOLUI,IX,A;L,2,3,35,RISHABH PANDIT,VIII,B;R,2,1,49,ANKIT KAR,VIII,B;R,2,2,13,PARASH KUNTI,IX,B;R,2,3,52,SANDIP DIGAR,VIII,B;L,3,1,33,PRADEEP CHAKRABORTY,VII,B;L,3,2,45,ANIKET SAMANTA,VI,B;L,3,3,62,SAYAN HAZRA,V,A;L,3,4,36,SUBHADEEP SASMAL,VII,B;R,3,1,42,SOTYAM MANDAL,VII,B;R,3,2,56,DIBYENDU SATIK,VI,B;R,3,3,68,ANIKET MALIK,V,A;R,3,4,44,KOUSHIK MONDAL,VII,B;L,4,1,1,JISHNU MAITY,IX,B;L,4,2,36,DEBRAJ SATIK,VIII,B;L,4,3,5,SUDIP MAITY,IX,B;R,4,1,14,ANIK GHOSH,IX,B;R,4,2,62,PANCHAM DOLUI,VIII,B;R,4,3,17,SUVAJIT DHARA,IX,B;L,5,1,46,KARTICK BERA,VI,B;L,5,2,38,DEBJIT DHARA,VII,B;L,5,3,63,ROHIT DHARA,V,A;L,5,4,48,RAHUL ADAK,VI,B;R,5,1,58,SUBHAJIT KHAN,VI,B;R,5,2,48,ARPAN HAZRA,VII,B;R,5,3,1,AISHIK SAMANTA,V,B;R,5,4,59,AYUSH DOLAI,VI,B;L,6,1,40,KISHAN PATRA,VIII,B;L,6,2,8,AYUSH MAJI,IX,B;L,6,3,42,SUJAN SHEE,VIII,B;R,6,1,63,ANKAN ADAK,VIII,B;R,6,2,20,SOUNAK SANTRA,IX,B;R,6,3,64,ROHIT HAZRA,VIII,B;L,7,1,39,ROHAN MAITY,VII,B;L,7,2,50,ROHIT MONDAL,VI,B;L,7,3,64,SAHEB HAZRA,V,A;L,7,4,40,ROCKY DOLAI,VII,B;R,7,1,50,DIPAK SARDAR,VII,B;R,7,2,2,ADRIJE BERA,V,B;R,7,3,60,TUSHAR DAS,VI,B;R,7,4,52,SAHEB ADAK,VII,B;L,8,1,9,OM SAMANTA,IX,B;L,8,2,47,AKASH DOLAI,VIII,B;L,8,3,12,SHUVECHHA SAMANTA,IX,B"},"3.2":{"c":"B","l":8,"r":7,"s":"L,1,1,6,ANURAG DOLAI,V,B;L,1,2,61,DEBANGSHU ADAK,VI,B;L,1,3,53,SAYAN KOTAL,VII,B;L,1,4,9,PIUS POREY,V,B;R,1,1,9,MRINAL PATRA,VI,C;R,1,2,62,DEBJIT SENAPATI,VII,B;R,1,3,18,RITWICK KHAN,V,B;R,1,4,11,SHUBANG DAS,VI,C;L,2,1,22,SOUVIK HAZRA,IX,B;L,2,2,66,SANU GHORUI,VIII,B;L,2,3,23,SHRIJIT GHORAI,IX,B;R,2,1,30,ARPAN SANKI,IX,B;R,2,2,17,SOURAV SAMANTA,VIII,C;R,2,3,31,RUPAM DHAN,IX,B;L,3,1,1,ARITRA SAMANTA,VI,C;L,3,2,54,SHIBNATH DOLAI,VII,B;L,3,3,10,AYUSH DHARA,V,B;L,3,4,2,OM MANDAL,VI,C;R,3,1,8,ANIK MAITY,VII,C;R,3,2,20,ARANYA MANNA,V,B;R,3,3,15,SANDIP CHANAK,VI,C;R,3,4,10,SAYAN BERA,VII,C;L,4,1,67,KRISHNENDU SAMANTA,VIII,B;L,4,2,24,RUPAM KAR,IX,B;L,4,3,2,RAKTIM PANJA,VIII,C;R,4,1,20,PRALAY GOSWAMI,VIII,C;R,4,2,33,DIPANJAN BERA,IX,B;R,4,3,23,AMIT PANDIT,VIII,C;L,5,1,55,BUBAI DIGAR,VII,B;L,5,2,11,SUMAN SASMAL,V,B;L,5,3,6,SUJAN DOLAI,VI,C;L,5,4,57,BISHNU CHAKRABORTY,VII,B;R,5,1,23,TRISHAN SASMAL,V,B;R,5,2,18,SOURADIPTA KARAK,VI,C;R,5,3,11,PRIYAM MAL,VII,C;R,5,4,26,KIRAN KAR,V,B;L,6,1,25,SUMAN JANA,IX,B;L,6,2,6,AVIRUP DOLAI,VIII,C;L,6,3,27,RAMESH MAL,IX,B;R,6,1,36,ANUPAM ADAK,IX,B;R,6,2,30,SUBHADIP MAITY,VIII,C;R,6,3,39,SUBHAM CHOWDHURY,IX,B;L,7,1,14,ROHIT CHANAK,V,B;L,7,2,7,RAJDIP JANA,VI,C;L,7,3,60,SUDIP MONDAL,VII,B;L,7,4,15,TUHIN SAMANTA,V,B;R,7,1,20,ROHIT GHORAI,VI,C;R,7,2,13,SUDIP BERA,VII,C;R,7,3,27,SANTANU DHARA,V,B;R,7,4,24,PRITAM CHANAK,VI,C;L,8,1,7,SURJA ADAK,VIII,C;L,8,2,28,SURYA NARAYAN DOLAI,IX,B;L,8,3,16,SAYAN BHUNIA,VIII,C"},"3.3":{"c":"B","l":9,"r":8,"s":"L,1,1,15,SUMAN HAZRA,VII,C;L,1,2,28,RAJDIP KHAN,V,B;L,1,3,25,PRITAM JANA,VI,C;L,1,4,17,ARNAB PATRA,VII,C;R,1,1,48,SHIBU JANA,VIII,C;R,1,2,56,DEEP HAZRA,IX,B;R,1,3,49,ROHIT MANDAL,VIII,C;L,2,1,33,AYAN SANTRA,VIII,C;L,2,2,40,PAPAI KHAN,IX,B;L,2,3,36,SUMAN DAS,VIII,C;R,2,1,37,SAHEB ADAK,VI,C;R,2,2,38,ADITYA KHAN,VII,C;R,2,3,42,PRIYAJIT HAZRA,V,B;R,2,4,38,ANGSHU ADAK,VI,C;L,3,1,29,SOHAM ADAK,V,B;L,3,2,28,SUMAN BAG,VI,C;L,3,3,18,DEBJOYTI KUMAR BERA,VII,C;L,3,4,32,RITESH BERA,V,B;R,3,1,64,SOUMAJIT PARAI,IX,B;R,3,2,51,SOUMYADIP KHAN,VIII,C;R,3,3,65,KUSHAN PATRA,IX,B;L,4,1,44,RIK MONDAL,IX,B;L,4,2,38,JOYJIT KUNTI,VIII,C;L,4,3,45,PRITAM ADAK,IX,B;R,4,1,39,SANDIP MAITY.,VII,C;R,4,2,45,ROHAN ADAK,V,B;R,4,3,40,SAYAN POREY,VI,C;R,4,4,41,SANU SAMANTA,VII,C;L,5,1,29,PRITAM SANTRA,VI,C;L,5,2,20,RONY SANTRA,VII,C;L,5,3,35,KUSHAL BERA,V,B;L,5,4,33,SAYAN DALBERA,VI,C;R,5,1,52,SURAJIT DHARA,VIII,C;R,5,2,66,SUVADIP MONDAL,IX,B;R,5,3,53,AMARESH KHAN,VIII,C;L,6,1,39,ANKON DIGAR,VIII,C;L,6,2,47,SOUMALYA MANDAL,IX,B;L,6,3,44,SURESH BAG,VIII,C;R,6,1,47,ARKA DOGRA,V,B;R,6,2,43,RAJ PAKHIRA,VI,C;R,6,3,42,SUBHADIP RUIDAS,VII,C;R,6,4,50,TUHIN DOLAI,V,B;L,7,1,27,SAYAN ADAK,VII,C;L,7,2,38,BAPPA DOLAI,V,B;L,7,3,34,ANKUSH KARAK,VI,C;L,7,4,29,SANU MAKHAL,VII,C;R,7,1,70,AKASH KHAN,IX,B;R,7,2,55,ROHIT SANTRA,VIII,C;R,7,3,71,SANTANU KHAN,IX,B;L,8,1,49,PRINCE MAITY,IX,B;L,8,2,46,ATANU KAR,VIII,C;L,8,3,51,SAGAR ADHIKARI,IX,B;R,8,1,46,SURESH MAKHAL,VI,C;R,8,2,45,PREM KHAN,VII,C;R,8,3,53,SHIRSHENDU DIGER,V,B;R,8,4,50,PRITAM MONDAL,VI,C;L,9,1,39,KRISHNAKANATA DHARA,V,B;L,9,2,35,RANIT KOTAL,VI,C;L,9,3,36,ARITRA GOSWAMI,VII,C;L,9,4,40,ARIJIT DOLAI,V,B"},"3.7":{"c":"B","l":7,"r":6,"s":"L,1,1,46,KESHAB DOLAI,VII,C;L,1,2,54,ARJIT DOLUI,V,B;L,1,3,51,SAYAN SANTRA,VI,C;L,1,4,47,SAYAN SANKI,VII,C;R,1,1,85,RAJ SANTRA,IX,B;R,1,2,62,ARIJIT DHARA,VIII,C;R,1,3,86,DEV ADAK,IX,B;L,2,1,57,RAJESH CHOWDHURY,VIII,C;L,2,2,73,KRISHNA KHAN,IX,B;L,2,3,58,SAHEB HAZRA,VIII,C;R,2,1,64,RANIT SATIK,V,B;R,2,2,57,SUMIT DOLAI,VI,C;R,2,3,57,BIJOY MONDAL,VII,C;R,2,4,65,SWARUP MAJI,V,B;L,3,1,58,PALASH MAITY,V,B;L,3,2,53,KRISHNA SAMANTA,VI,C;L,3,3,48,SOUMADIP HAZRA,VII,C;L,3,4,60,SAMIRAN ADAK,V,B;R,3,1,63,RADHANATH DOLUI,VIII,C;R,3,2,87,BISWQAJIT HAZRA,IX,B;R,3,3,64,APU ISWAR,VIII,C;L,4,1,74,PRADIP RUIDAS,IX,B;L,4,2,59,SUMIT MANDAL,VIII,C;L,4,3,81,ADITYA ADAK,IX,B;R,4,1,59,NITYANANDA BHUNIA,VI,C;R,4,2,59,PRITAM SAMANTA,VII,C;R,4,3,66,MRINMOY DOLAI,V,B;R,4,4,60,SANJAY BERA,VI,C;L,5,1,54,ANKIT SASMAL,VI,C;L,5,2,49,PRITAM DOLAI,VII,C;L,5,3,62,SAYAN PAL,V,B;L,5,4,55,ANSHU SAMANTA,VI,C;R,5,1,88,SUMIT DOLAI,IX,B;R,5,2,66,ROHIT HAZRA,VIII,C;R,5,3,89,KRIPANANDA HAZRA,IX,B;L,6,1,60,RIJU DHARA,VIII,C;L,6,2,84,PRASENJIT ADAK,IX,B;L,6,3,61,DEBABRATA DOLAI,VIII,C;R,6,1,61,SURYA HAZRA,VII,C;R,6,2,67,KRISHNA KUMAR HAZRA,V,B;R,6,3,61,PRADIP DOLAI,VI,C;R,6,4,63,ROHAN PAUL,VII,C;L,7,1,51,KRISHNENDU SAMANTA,VII,C;L,7,2,63,SUBRATA ADAK,V,B;L,7,3,56,ANKUSH BERA,VI,C;L,7,4,56,SHYAMAL HAZRA,VII,C"},"1.11":{"c":"G","l":9,"r":9,"s":"L,1,1,1,KASTURI DOLAI,VIII,A;L,1,2,1,SNIGDHA SAMANTA,IX,A;L,1,3,3,SNEHA JANA,VIII,A;R,1,1,10,ANNANYA CHANAK,IX,A;R,1,2,13,RETEKA BERA,VIII,A;R,1,3,11,SUVAMITA MAL,IX,A;L,2,1,1,ANKITA KAR,VII,A;L,2,2,1,SRIJITA DAS,VI,A;L,2,3,1,SAMPRITI DOLAI,V,A;L,2,4,2,RIYA DHAN,VII,A;R,2,1,8,SUINKA SAMANTA,VII,A;R,2,2,14,DISHA SASMAL,VI,A;R,2,3,10,RIYA BERA,V,A;R,2,4,9,PAPIYA KUNTI,VII,A;L,3,1,2,SNEHA DOLAI,IX,A;L,3,2,6,SATHI SAMANTA,VIII,A;L,3,3,3,RIMPA KAR,IX,A;R,3,1,17,RETU GHORAI,VIII,A;R,3,2,12,SWARUPA KHAN,IX,A;R,3,3,18,PRITI BERA,VIII,A;L,4,1,4,SAHELI GOSWAMI,VI,A;L,4,2,3,APARUPA JANA,VII,A;L,4,3,3,BRISTI SAMANTA,V,A;L,4,4,9,ANWESHA SAMANTA,VI,A;R,4,1,15,SONAKSHI BERA,VI,A;R,4,2,11,MONALI SAMANTA,VII,A;R,4,3,12,ADRITA SANTRA,V,A;R,4,4,19,SAMPA SAMANTA,VI,A;L,5,1,7,RASHI HAZRA,VIII,A;L,5,2,4,BARSHA SAU,IX,A;L,5,3,9,PAULAMI MAITY,VIII,A;R,5,1,13,RUPSHA MANNA,IX,A;R,5,2,19,MANALI KAR,VIII,A;R,5,3,14,AHELI GHORAI,IX,A;L,6,1,4,ANKITA MANNA,VII,A;L,6,2,11,SWIKRITI SASMAL,VI,A;L,6,3,5,DIYA BERA,V,A;L,6,4,5,ANUSHKA SANKI,VII,A;R,6,1,12,SOHANI PANDIT,VII,A;R,6,2,21,SWAPNA KANJI,VI,A;R,6,3,15,RITISHA GHORAI,V,A;R,6,4,15,SNIGDHA MANNA,VII,A;L,7,1,6,NISHA SAMANTA,IX,A;L,7,2,10,MEGHNA KOTAL,VIII,A;L,7,3,7,BARSHA BAG,IX,A;R,7,1,20,TAMASA BERA,VIII,A;R,7,2,16,SAYANI PATRA,IX,A;R,7,3,21,PRITIKA PAKHIRA,VIII,A;L,8,1,8,SAYANTIKA MONDAL,V,A;L,8,2,12,SAYANI SAMANTA,VI,A;L,8,3,6,ANUSHKA KUNTI,VII,A;L,8,4,9,ARUSHI BERA,V,A;R,8,1,16,SUTAPA MAJI,VII,A;R,8,2,24,SNEHA PANJA,VI,A;R,8,3,19,RITTIKA MONDAL,V,A;R,8,4,23,ANTARA KOTAL,VII,A;L,9,1,11,DIPTI MAL,VIII,A;L,9,2,9,ANUSHKA SAMANTA,IX,A;L,9,3,12,DISHA BERA,VIII,A;R,9,1,24,SNEHA DOLUI,VIII,A;R,9,2,17,SUBHASREE GHORAI,IX,A"},"1.12":{"c":"G","l":9,"r":9,"s":"L,1,1,26,KIRAN SAMANTA,VIII,A;L,1,2,18,DIPANWITA SAL,IX,A;L,1,3,27,MANU SAMANTA,VIII,A;R,1,1,31,KHUSI BERA,IX,A;R,1,2,39,PAYEL PANDIT,VIII,A;R,1,3,32,RUPSHA GHOSH,IX,A;L,2,1,24,SONAMONI DOLAI,VII,A;L,2,2,25,DIYA DHAN,VI,A;L,2,3,20,RUHI MANDAL,V,A;L,2,4,25,PAYEL MAITY,VII,A;R,2,1,34,PRITI DOLAI,VII,A;R,2,2,36,ANITA KANJI,VI,A;R,2,3,28,PIU BERA,V,A;R,2,4,35,SUPRITI SHOW,VII,A;L,3,1,22,MONALISA MONDAL,IX,A;L,3,2,28,ANINDITA BAG,VIII,A;L,3,3,23,PAPIYA BERA,IX,A;R,3,1,40,ANKITA HAZRA,VIII,A;R,3,2,33,PRIYA BAG,IX,A;R,3,3,41,SHREYA HAZRA,VIII,A;L,4,1,30,SUDIPA MAKHAL,VI,A;L,4,2,27,TUYA PATRA,VII,A;L,4,3,23,NEHA POREY,V,A;L,4,4,32,TIYASA MONDAL,VI,A;R,4,1,37,ANURADHA PAL,VI,A;R,4,2,36,REYA ROY,VII,A;R,4,3,36,ANUSHKA MONDAL,V,A;R,4,4,39,NISHA MONDAL,VI,A;L,5,1,29,JAYASHREE DOLUI,VIII,A;L,5,2,24,SNEHA SANTRA,IX,A;L,5,3,33,SUPRIYA KHAN,VIII,A;R,5,1,35,DEBIKA PARAI,IX,A;R,5,2,44,SANGITA BHUNIA,VIII,A;R,5,3,37,TRISHA DOLAI,IX,A;L,6,1,28,SWASTIKA SATIK,VII,A;L,6,2,33,RUNA PATRA,VI,A;L,6,3,25,DIPIKA LAGA,V,A;L,6,4,32,DISHA MIDYA,VII,A;R,6,1,38,SHILPA ADAK,VII,A;R,6,2,40,RASHNI DHAN,VI,A;R,6,3,37,PRATYUSHA SAMANTA,V,A;R,6,4,39,MOUMITA KARAK,VII,A;L,7,1,27,SONAM SAMANTA,IX,A;L,7,2,34,SHRABANTI MAKHAL,VIII,A;L,7,3,28,SHEULI HAZRA,IX,A;R,7,1,47,DIPANWITA CHOWDHURY,VIII,A;R,7,2,40,SWAPNA RANG,IX,A;R,7,3,49,SOMASHREE BERA,VIII,A;L,8,1,26,SHRUTI DHARA,V,A;L,8,2,34,SUPRITI SAMANTA,VI,A;L,8,3,33,BRISTI SANTRA,VII,A;L,8,4,27,DISHA SAMANTA,V,A;R,8,1,41,CHAYNA SATIK,VII,A;R,8,2,45,LOVELY HAZRA,VI,A;R,8,3,40,DISA ADAK,V,A;R,8,4,42,SANGITA HAZRA,VII,A;L,9,1,35,PIYASA ADAK,VIII,A;L,9,2,30,JHILICK DIGAR,IX,A;L,9,3,38,ARADHA HAZRA,VIII,A;R,9,1,51,PIU ADAK,VIII,A;R,9,2,42,POULOMI SAMANTA,IX,A"},"1.13":{"c":"G","l":9,"r":9,"s":"L,1,1,52,NIBEDITA SAREN,VIII,A;L,1,2,43,TRISHA SAMANTA,IX,A;L,1,3,55,PUJA MURMU,VIII,A;R,1,1,57,SAYANTI SAU,IX,A;R,1,2,4,SOHANI PATRA,VIII,B;R,1,3,58,BARSHA CHAKRABORTY,IX,A;L,2,1,44,PRIYA SANTRA,VII,A;L,2,2,47,PUNAM MAITY,VI,A;L,2,3,43,MOUMILI DOLAI,V,A;L,2,4,45,NIBEDITA DOLUI,VII,A;R,2,1,59,MALLIKA DOLAI,VII,A;R,2,2,54,KEYA PAL,VI,A;R,2,3,50,SAYANTIKA DHARA,V,A;R,2,4,63,SNEHA PANJA,VII,A;L,3,1,46,RANI KOTAL,IX,A;L,3,2,56,PIYALI ADAK,VIII,A;L,3,3,47,MOULI SAREN,IX,A;R,3,1,6,TANUSRI MANNA,VIII,B;R,3,2,59,SUPARNA SANTRA,IX,A;R,3,3,7,SUMONA MALIK,VIII,B;L,4,1,48,ANKITA SARDAR,VI,A;L,4,2,54,SUSMITA SANTRA,VII,A;L,4,3,44,RIYA MAJI,V,A;L,4,4,49,RIMI MONDAL,VI,A;R,4,1,55,PURBASHA SEN,VI,A;R,4,2,2,SOHANI DHAN,VII,B;R,4,3,53,DIYA ADHIKARI,V,A;R,4,4,61,BRISTI RAY,VI,A;L,5,1,65,TUSTU DOLAI,VIII,A;L,5,2,51,BARSHA KARAK,IX,A;L,5,3,66,BEAUTY KUNTI,VIII,A;R,5,1,63,PURNIMA KOTAL,IX,A;R,5,2,8,NEHA GHARAI,VIII,B;R,5,3,64,ASHA SAMANTA,IX,A;L,6,1,55,RIYA KHAN,VII,A;L,6,2,51,SWARNA POREY,VI,A;L,6,3,46,ISHA ROY,V,A;L,6,4,57,MANDIRA KHAN,VII,A;R,6,1,3,PUNAM BERA,VII,B;R,6,2,1,BRISTI SAMANTA,VI,B;R,6,3,58,DISHA DAS,V,A;R,6,4,5,SOYASTI KAR,VII,B;L,7,1,53,SNEHA MALIK,IX,A;L,7,2,68,SUMITRA HEMRAM,VIII,A;L,7,3,54,MANABIKA DOLAI,IX,A;R,7,1,10,SUMANA PANJA,VIII,B;R,7,2,65,SONIYA CHOWDHURY,IX,A;R,7,3,12,KHUSI KAR,VIII,B;L,8,1,48,ANJALI MAITY,V,A;L,8,2,52,NANDITA MISRA,VI,A;L,8,3,58,TIYASA KHAN,VII,A;L,8,4,49,AROHI PATRA,V,A;R,8,1,6,SANDIPTA SANTRA,VII,B;R,8,2,3,SARAMA HAZRA,VI,B;R,8,3,59,MEGHLA KAR,V,A;R,8,4,7,ANUSKA MAITY,VII,B;L,9,1,2,BARSHA MAJI,VIII,B;L,9,2,55,SMRITI SAMANTA,IX,A;L,9,3,3,RIMI SAMANTA,VIII,B;R,9,1,13,MALLIKA PANJA,VIII,B;R,9,2,68,APARNA HAZRA,IX,A;R,9,3,14,KAROLINA SAMANTA,VIII,B"},"1.15":{"c":"G","l":9,"r":9,"s":"L,1,1,15,RAJASHREE MAITY,VIII,B;L,1,2,69,SAYANI KHAN,IX,A;L,1,3,16,LISA SANTRA,VIII,B;R,1,1,88,TRISHNA SAMANTA,IX,A;R,1,2,27,SHREYA GOSWAMI,VIII,B;R,1,3,91,DIPTI SATIK,IX,A;L,2,1,9,MEGHNA GHORAI,VII,B;L,2,2,4,RITIKA MANDAL,VI,B;L,2,3,60,SWEETY MAJI,V,A;L,2,4,10,BAISHAKHI SAMANTA,VII,B;R,2,1,18,DIPIKA MONDAL,VII,B;R,2,2,19,NAMRATA MALIK,VI,B;R,2,3,70,SOUMILI PRODHAN,V,A;R,2,4,21,RITWICKA PATRA,VII,B;L,3,1,71,KAKULI MANDI,IX,A;L,3,2,17,DIPSHIKHA DHARA,VIII,B;L,3,3,78,ANANYA SATICK,IX,A;R,3,1,28,RAKHI GHORAI,VIII,B;R,3,2,92,RIMITA DOLAI,IX,A;R,3,3,30,KEYA DHAN,VIII,B;L,4,1,8,TANVI ADHIKARI,VI,B;L,4,2,12,ANUSKA SASMAL,VII,B;L,4,3,65,NEHA DOLAI,V,A;L,4,4,10,ANKITA GOSWAMI,VI,B;R,4,1,71,RESMA DAS,V,A;R,4,2,21,SHREYOSI KHAN,VI,B;R,4,3,24,ANUSKA MANDAL,VII,B;R,4,4,72,KHUSHI SANTRA,V,A;L,5,1,18,KEYA SAMANTA,VIII,B;L,5,2,80,SUPRIYA MAITY,IX,A;L,5,3,21,MUSKAN MAJI,VIII,B;R,5,1,2,AINDRILA GHOSH,IX,B;R,5,2,33,SRABANI PAL,VIII,B;R,5,3,3,ADITI JANA,IX,B;L,6,1,13,DISHA SAMANTA,VII,B;L,6,2,11,SONAKSHI KUNTI,VI,B;L,6,3,66,SNEHA DOLAI,V,A;L,6,4,16,RIMI BHOWMICK,VII,B;R,6,1,22,MANISHA BERA,VI,B;R,6,2,25,SNEHA BAIRI,VII,B;R,6,3,73,SUMANA TUDU,V,A;R,6,4,23,TANSHREE SAMANTA,VI,B;L,7,1,81,MOUMITA ADAK,IX,A;L,7,2,22,TITHI KHAN,VIII,B;L,7,3,83,MOUPIYA MAJI,IX,A;R,7,1,34,ANKITA DOLAI,VIII,B;R,7,2,4,SUDESHNA KOTAL,IX,B;R,7,3,37,RUPSA PATRA,VIII,B;L,8,1,13,SUSMITA KHAN,VI,B;L,8,2,17,SAYANTANI SARDAR,VII,B;L,8,3,69,BRISTI HAZRA,V,A;L,8,4,16,MONALI SAMANTA,VI,B;R,8,1,29,SUCHANA PORE,VII,B;R,8,2,24,MEGHNA KHAN,VI,B;R,8,3,74,AYANTIKA DIGAR,V,A;R,8,4,30,SONASKHI MONDAL,VII,B;L,9,1,25,ANKITA SARKAR,VIII,B;L,9,2,87,SAYANTIKA MAKHAL,IX,A;L,9,3,26,RIMPA SAMANTA,VIII,B;R,9,1,38,PIU MIDYA,VIII,B;R,9,2,6,ANKITA PAL,IX,B;R,9,3,39,MONAMI PANDIT,VIII,B"},"1.14":{"c":"G","l":9,"r":9,"s":"L,1,1,41,MEGHNA HANSDA,VIII,B;L,1,2,7,ANKITA SAMANTA,IX,B;L,1,3,43,SUSMITA LAGA,VIII,B;R,1,1,21,ANWESHA DAS,IX,B;R,1,2,53,ANINDITA BAG,VIII,B;R,1,3,26,ANKITA SANJAY BERA,IX,B;L,2,1,31,URMI SAMANTA,VII,B;L,2,2,25,ISHIKA DOLAI,VI,B;L,2,3,75,SNEHA MONDAL,V,A;L,2,4,34,RUMPA DOLUI,VII,B;R,2,1,47,JAYEETA HAZRA,VII,B;R,2,2,43,ARPITA BAG,VI,B;R,2,3,5,SUKRITI BERA,V,B;R,2,4,49,SHATABDI PANDIT,VII,B;L,3,1,10,SHREYA BHUNIA,IX,B;L,3,2,44,RUPSA MONDAL,VIII,B;L,3,3,11,ANU MAJI,IX,B;R,3,1,54,KOYEL ADHIKARY,VIII,B;R,3,2,29,SUSMITA DHAN,IX,B;R,3,3,55,SUKHI SOREN,VIII,B;L,4,1,27,SRABANTI ADAK,VI,B;L,4,2,35,SUSHAMA MURMU,VII,B;L,4,3,76,AVNEET KAR,V,A;L,4,4,29,SUINA SAMANTA,VI,B;R,4,1,7,MOUPIYA BERA,V,B;R,4,2,47,TUTUL MAJI,VI,B;R,4,3,51,RIMI PAL,VII,B;R,4,4,8,AMBIKA JANA,V,B;L,5,1,45,BARSA PAL,VIII,B;L,5,2,15,ESITA MANDAL,IX,B;L,5,3,46,RIYA DALUI,VIII,B;R,5,1,32,BEATY ADAK,IX,B;R,5,2,56,NEHA ADAK,VIII,B;R,5,3,34,PRITI MAJI,IX,B;L,6,1,37,ANUSHKA MANDAL,VII,B;L,6,2,37,RITU SAMANTA,VI,B;L,6,3,3,BRISTI SAW,V,B;L,6,4,43,SANJHBATI DOLUI,VII,B;R,6,1,49,RIYA DOLAI,VI,B;R,6,2,56,PRIYANKA BAG,VII,B;R,6,3,12,ISHA MANNA,V,B;R,6,4,51,SONAKSHI SAMANTA,VI,B;L,7,1,16,DIYA JANA,IX,B;L,7,2,48,RUPSA MONDAL,VIII,B;L,7,3,18,ANWESHA SANKI,IX,B;R,7,1,57,BAISAKHI SANTRA,VIII,B;R,7,2,35,SULEKHA BERA,IX,B;R,7,3,58,SRABANTI SATICK,VIII,B;L,8,1,39,SUSMITA DOLUI,VI,B;L,8,2,45,SEULI KUNTI,VII,B;L,8,3,4,TITLI PANJA,V,B;L,8,4,42,ADISHA BERA,VI,B;R,8,1,58,RUPA HAZRA,VII,B;R,8,2,52,PRIYANKA MONDAL,VI,B;R,8,3,13,RIMI GHOSH,V,B;R,8,4,59,ANTARA HAZRA,VII,B;L,9,1,50,PRIYA SAMANTA,VIII,B;L,9,2,19,PRITY MANDAL,IX,B;L,9,3,51,TUNGABIDYA MURMU,VIII,B;R,9,1,59,BARSHA POREY,VIII,B;R,9,2,37,PRADIPTA GHOSH,IX,B;R,9,3,61,PAYEL DOLAI,VIII,B"},"1.10":{"c":"G","l":9,"r":8,"s":"L,1,1,65,TITHI ADAK,VIII,B;L,1,2,38,BARNALI CHAKRABORTY,IX,B;L,1,3,1,TATHOI MANNA,VIII,C;R,1,1,4,DIPANWITA POREY,VII,C;R,1,2,8,TANUSHREE MAJI,VI,C;R,1,3,24,ENAKSHI KANJI,V,B;R,1,4,5,PRITI SAMANTA,VII,C;L,2,1,61,SAYANTIKA SEN,VII,B;L,2,2,55,TINA RUIDAS,VI,B;L,2,3,16,ARUSHI GHORAI,V,B;L,2,4,63,ARADHYA MANNA,VII,B;R,2,1,52,MAMANI DOLAI,IX,B;R,2,2,12,PRIYASHRI PANDIT,VIII,C;R,2,3,53,DISHA DOLAI,IX,B;L,3,1,41,SUPRIYA HANSDA,IX,B;L,3,2,3,TIYASA BERA,VIII,C;L,3,3,42,SAYANTIKA HAZRA,IX,B;R,3,1,10,SNEHASHREE SAMANTA,VI,C;R,3,2,6,SRIJITA DOLAI,VII,C;R,3,3,25,DIPANWITA PANJA,V,B;R,3,4,12,POULOUMI SAMANTA,VI,C;L,4,1,57,TANUSHREE ROY,VI,B;L,4,2,64,MITALI HANSDA,VII,B;L,4,3,17,BINSHITA BHUKTA,V,B;L,4,4,3,ANITA SATICK,VI,C;R,4,1,13,RIYA SAMANTA,VIII,C;R,4,2,54,ANUSHREE HAZRA,IX,B;R,4,3,14,ANUSKA BHUNIA,VIII,C;L,5,1,4,ANUSREE POREY,VIII,C;L,5,2,43,PAPIYA DOLAI,IX,B;L,5,3,5,SNIGDHA PATRA,VIII,C;R,5,1,7,SRISTI GHORAI,VII,C;R,5,2,13,SUHANA SAMANTA,VI,C;R,5,3,30,TRISHITA KUNTI,V,B;R,5,4,9,NEHA DOLAI,VII,C;L,6,1,1,ANKITA MANDAL,VII,C;L,6,2,4,SIPRA PRAMANIK,VI,C;L,6,3,19,SHRUTI MAJI,V,B;L,6,4,2,DISHA SAMANTA,VII,C;R,6,1,55,RUPSA DAS,IX,B;R,6,2,15,RUPSA BERA,VIII,C;R,6,3,57,TISA DOLAI,IX,B;L,7,1,46,SAGARIKA MURMU,IX,B;L,7,2,8,SNEHA KAR,VIII,C;L,7,3,48,DIPSIKHA MAITY,IX,B;R,7,1,12,SOUMILI BERA,VII,C;R,7,2,14,TANIYA BERA,VI,C;R,7,3,31,DIPANWITA MAITY,V,B;R,7,4,14,NISHA ADAK,VII,C;L,8,1,21,ISHITA DOLAI,V,B;L,8,2,5,ANWESHA POREY,VI,C;L,8,3,3,ANKITA MONDAL,VII,C;L,8,4,22,SAYORI SAMANTA,V,B;R,8,1,18,SHREYA BERA,VIII,C;R,8,2,58,BISHNUPRIYA MURMU,IX,B;R,8,3,19,RUPSA DAS,VIII,C;L,9,1,10,PIYALI PATRA,VIII,C;L,9,2,50,RUPSA HAZRA,IX,B;L,9,3,11,KHUSHI DALAI,VIII,C"},"1.9":{"c":"G","l":9,"r":8,"s":"L,1,1,16,ANUSKA BERA,VII,C;L,1,2,16,SHRABANTI MONDAL,VI,C;L,1,3,33,SNEHASHRI SAMANTA,V,B;L,1,4,19,BARSHA PATRA,VII,C;R,1,1,28,MISTI JANA,VIII,C;R,1,2,68,NISHA KHAN,IX,B;R,1,3,29,SONAKSHI JANA,VIII,C;L,2,1,21,RUMPA BERA,VIII,C;L,2,2,59,SUCHARITA PATRA,IX,B;L,2,3,22,DIBYA PAL,VIII,C;R,2,1,26,MOUSUMI SANTRA,VII,C;R,2,2,27,TAGARI ADAK,VI,C;R,2,3,44,APARNA GHORAI,V,B;R,2,4,28,PALLABI KHAN,VII,C;L,3,1,17,SONAKSHI JANA,VI,C;L,3,2,21,SNEHA SANTRA,VII,C;L,3,3,34,SUDIPTA GHOSH,V,B;L,3,4,19,MEGHA PATRA,VI,C;R,3,1,69,RIKTA HAZRA,IX,B;R,3,2,31,MASAMMAT NASRIN KHATUN,VIII,C;R,3,3,72,ANITA MAKHAL,IX,B;L,4,1,60,PRIYANKA DUTTA,IX,B;L,4,2,24,BARSHA HAZRA,VIII,C;L,4,3,61,PRITI HAZRA,IX,B;R,4,1,46,SUPRIYA DIGAR,V,B;R,4,2,30,AARUSHI BERA,VI,C;R,4,3,30,SUPRITY SAMANTA,VII,C;R,4,4,48,ISHIKA MANNA,V,B;L,5,1,22,SONIYA MALIK,VII,C;L,5,2,21,MANISHA BERA,VI,C;L,5,3,36,SOUMI JANA,V,B;L,5,4,23,ANKITA SATICK,VII,C;R,5,1,32,SUNAKSI KOTAL,VIII,C;R,5,2,75,SWAPNA HAZRA,IX,B;R,5,3,34,TAPUR SAMANAT,VIII,C;L,6,1,25,RUPSA MISHRA,VIII,C;L,6,2,62,MOUSUMI MONDAL,IX,B;L,6,3,26,ANKITA SANTRA,VIII,C;R,6,1,31,SNEHA MANNA,VI,C;R,6,2,31,FALGUNI JANA,VII,C;R,6,3,49,SAYANTIKA KHAN,V,B;R,6,4,32,SUMANA HAZRA,VI,C;L,7,1,37,TRISA GHORAI,V,B;L,7,2,22,SAHELI CHAKRABORTY,VI,C;L,7,3,24,SNEHA SAMANTA,VII,C;L,7,4,41,MADHUSREE DOLAI,V,B;R,7,1,35,MANISHA SAMANTA,VIII,C;R,7,2,76,SUPRIYA ADAK,IX,B;R,7,3,37,ANUSKA MALIK,VIII,C;L,8,1,63,EESHIKA PANDIT,IX,B;L,8,2,27,SREYA SANTRA,VIII,C;L,8,3,67,SUVRA HAZRA,IX,B;R,8,1,32,SHRUTI MONDAL,VII,C;R,8,2,36,PRIYA DOLUI,VI,C;R,8,3,51,DEYA BHUKTA,V,B;R,8,4,33,RIMJHIM JANA,VII,C;L,9,1,23,PIU GHORAI,VI,C;L,9,2,25,SNEHA BERA,VII,C;L,9,3,43,SANGITA KHAN,V,B;L,9,4,26,NEHA PAKHIRA,VI,C"},"1.5":{"c":"G","l":8,"r":7,"s":"L,1,1,40,SNEHA CHAKRABORTY,VIII,C;L,1,2,77,SUSMITA DOLUI,IX,B;L,1,3,41,RAKHI SHOW,VIII,C;R,1,1,52,LAXMI HEMRAM,VII,C;R,1,2,48,PIU HAZRA,VI,C;R,1,3,61,SNEHA PATRA,V,B;R,1,4,53,BRISTI CHAKRABORTY,VII,C;L,2,1,34,BARSHA SHAL,VII,C;L,2,2,41,ASIMA SOREN,VI,C;L,2,3,52,MEGHLA DAS,V,B;L,2,4,35,SHRESTHA KUNTI,VII,C;R,2,1,50,ARUNIMA HAZRA,VIII,C;R,2,2,90,SAMPURNA MAITY,IX,B;R,2,3,54,MANJUSHREE HAZRA,VIII,C;L,3,1,78,SRABANTI DHARA,IX,B;L,3,2,42,TUSU DHAN,VIII,C;L,3,3,79,UTTARA MAJI,IX,B;R,3,1,49,RITWIKA DOLAI,VI,C;R,3,2,54,TRISHNA MALAKAR,VII,C;R,3,3,68,MONISHA MURMU,V,B;R,3,4,52,PRIYANGI DOLAI,VI,C;L,4,1,42,PUJA HAZRA,VI,C;L,4,2,37,DUSHTU DIGAR,VII,C;L,4,3,55,RIMITA DOLAI,V,B;L,4,4,44,POULAMI DOLAI,VI,C;R,4,1,91,TIYA MAJI,IX,B;R,4,2,56,TITHI DIGAR,VIII,C;R,4,3,92,SONIYA KUNTI,IX,B;L,5,1,43,PINKI KOTAL,VIII,C;L,5,2,80,MAMANI MANNA,IX,B;L,5,3,45,SUPARNA CHANAK,VIII,C;R,5,1,55,APARNA HAZRA,VII,C;R,5,2,58,SHREYA KHAN,VI,C;R,5,3,69,RIMPA DOLAI,V,B;R,5,4,58,PINKI ISWAR,VII,C;L,6,1,40,KABERI DIGAR,VII,C;L,6,2,45,SANGITA MONDAL,VI,C;L,6,3,56,BRISTI HAZRA,V,B;L,6,4,44,KRISHNENDU BERA,VII,C;R,6,1,65,SUSMITA SAW,VIII,C;R,6,2,94,PUJA JANA,IX,B;R,6,3,68,RUPSA PANDIT,VIII,C;L,7,1,82,NEHA ADAK,IX,B;L,7,2,47,NIVA MONDAL,VIII,C;L,7,3,83,SUTAPA ADAK,IX,B;R,7,1,60,ANKITA ADHIKARI,VII,C;R,7,2,62,SUPRIYA BASKEY,VI,C;R,7,3,70,JASMIN PARVIN,V,B;R,7,4,62,SHARBONI HEMBRAM,VII,C;L,8,1,57,DIYA SHAL,V,B;L,8,2,47,MANISHA KHAN,VI,C;L,8,3,50,NAYNA ROY,VII,C;L,8,4,59,ANKITA POREY,V,B"}};
+
+      const BOYS_ROOMS = ['3.4', '1.4', '2.7', '2.5', '3.2', '3.3', '3.7'];
+      const GIRLS_ROOMS = ['1.11', '1.12', '1.13', '1.15', '1.14', '1.10', '1.9', '1.5'];
+
+      // =========================================================================
+      // 2. EXAM ROUTINE & TIMINGS DATA (EXACT OFFICIAL SCHEDULE)
+      // =========================================================================
+      const EXAM_TIMINGS = {
+        V: '11:30 AM – 1:10 PM',
+        VI: '11:30 AM – 2:00 PM',
+        VII: '11:30 AM – 2:00 PM',
+        VIII: '11:30 AM – 2:00 PM',
+        IX: '11:30 AM – 2:30 PM',
+      };
+
+      const EXAM_ROUTINE = [
+        { date: '30/11/2026', day: 'Monday',    dayBn: 'সোমবার',     V: 'Bengali',         VI: 'Bengali',                   VII: 'History',                   VIII: 'History',                   IX: 'History' },
+        { date: '01/12/2026', day: 'Tuesday',   dayBn: 'মঙ্গলবার',   V: '—',               VI: 'English',                   VII: 'Bengali',                   VIII: 'Bengali',                   IX: 'Bengali' },
+        { date: '02/12/2026', day: 'Wednesday', dayBn: 'বুধবার',     V: 'English',         VI: 'Science',                   VII: 'English',                   VIII: 'English',                   IX: 'English' },
+        { date: '03/12/2026', day: 'Thursday',  dayBn: 'বৃহস্পতিবার', V: '—',               VI: '—',                         VII: 'Sanskrit',                  VIII: 'Science',                   IX: 'Physical Science' },
+        { date: '05/12/2026', day: 'Saturday',  dayBn: 'শনিবার',     V: 'Science',         VI: 'Geography',                 VII: 'Geography',                 VIII: 'Geography',                 IX: 'Geography' },
+        { date: '07/12/2026', day: 'Monday',    dayBn: 'সোমবার',     V: 'Mathematics',     VI: 'Mathematics',               VII: 'Mathematics',               VIII: 'Mathematics',               IX: 'Mathematics' },
+        { date: '08/12/2026', day: 'Tuesday',   dayBn: 'মঙ্গলবার',   V: 'Computer Theory', VI: 'History',                   VII: 'Science',                   VIII: 'Sanskrit',                  IX: 'Life Science' },
+        { date: '09/12/2026', day: 'Wednesday', dayBn: 'বুধবার',     V: '—',               VI: 'Physical Education Theory', VII: 'Physical Education Theory', VIII: 'Physical Education Theory', IX: '—' },
+        { date: '10/12/2026', day: 'Thursday',  dayBn: 'বৃহস্পতিবার', V: '—',               VI: 'Computer Theory',           VII: 'Computer Theory',           VIII: 'Computer Theory',           IX: 'Computer Theory' },
+      ];
+
+      // =========================================================================
+      // 3. PARSE DATASET INTO FAST LOOKUP STRUCTURES
+      // =========================================================================
+      const ALL_STUDENTS = [];
+      const ROOM_MAP = {}; // roomId -> { category, maxL, maxR, benches: { 'L-1': [...], 'R-1': [...] } }
+      const CLASS_SECTIONS = { V: new Set(), VI: new Set(), VII: new Set(), VIII: new Set(), IX: new Set() };
+
+      let studentUid = 1;
+      for (const [roomId, roomObj] of Object.entries(RAW_SEATING_DATA)) {
+        const benches = {};
+        const entries = roomObj.s.split(';').filter(Boolean);
+        for (const entry of entries) {
+          const parts = entry.split(',');
+          if (parts.length < 7) continue;
+          const side = parts[0].trim();
+          const bench = parseInt(parts[1], 10);
+          const seat = parseInt(parts[2], 10);
+          const roll = parseInt(parts[3], 10);
+          const name = parts[4].trim();
+          const cls = parts[5].trim();
+          const sec = parts[6].trim();
+
+          const student = {
+            uid: studentUid++,
+            room: roomId,
+            category: roomObj.c === 'B' ? 'Boys' : 'Girls',
+            categoryCode: roomObj.c,
+            side, // 'L' or 'R'
+            bench,
+            seat,
+            roll,
+            name,
+            cls,
+            sec,
+            nameLower: name.toLowerCase(),
+          };
+
+          ALL_STUDENTS.push(student);
+          if (CLASS_SECTIONS[cls]) CLASS_SECTIONS[cls].add(sec);
+
+          const benchKey = `${side}-${bench}`;
+          if (!benches[benchKey]) benches[benchKey] = [];
+          benches[benchKey].push(student);
+        }
+
+        // Sort seats inside each bench by seat number
+        for (const key of Object.keys(benches)) {
+          benches[key].sort((a, b) => a.seat - b.seat);
+        }
+
+        ROOM_MAP[roomId] = {
+          room: roomId,
+          category: roomObj.c === 'B' ? 'Boys' : 'Girls',
+          categoryCode: roomObj.c,
+          maxL: roomObj.l,
+          maxR: roomObj.r,
+          benches,
+          totalStudents: entries.length,
+        };
+      }
+
+      // =========================================================================
+      // 4. APPLICATION STATE
+      // =========================================================================
+      let state = {
+        selectedStudent: null,
+        activeRoom: null,
+        routineMode: 'class', // 'class' or 'all'
+        routineClass: 'V',
+        inspectedStudent: null,
+      };
+
+      // =========================================================================
+      // 5. HELPER UTILITIES
+      // =========================================================================
+      const BN_DIGITS = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      function toBengaliNum(num) {
+        return String(num).replace(/\d/g, (d) => BN_DIGITS[Number(d)]);
+      }
+
+      function getOrdinal(n) {
+        const s = ['th', 'st', 'nd', 'rd'];
+        const v = n % 100;
+        return n + (s[(v - 20) % 10] || s[v] || s[0]);
+      }
+
+      function getSeatPositionLabel(seatNum, totalSeats) {
+        if (totalSeats === 4) {
+          if (seatNum === 1) return 'Leftmost Seat • একদম বামে';
+          if (seatNum === 2) return 'Center-Left • মাঝের বামে';
+          if (seatNum === 3) return 'Center-Right • মাঝের ডানে';
+          if (seatNum === 4) return 'Rightmost Seat • একদম ডানে';
+        }
+        if (totalSeats === 3) {
+          if (seatNum === 1) return 'Left Seat • বাম দিকে';
+          if (seatNum === 2) return 'Middle Seat • মাঝখানে';
+          if (seatNum === 3) return 'Right Seat • ডান দিকে';
+        }
+        if (totalSeats === 2) {
+          return seatNum === 1 ? 'Left Seat • বাম দিকে' : 'Right Seat • ডান দিকে';
+        }
+        return `Seat ${seatNum}`;
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      // Toast notification helper (never uses alert/confirm)
+      let toastTimer = null;
+      function showToast(msg) {
+        const toast = document.getElementById('appToast');
+        const toastMsg = document.getElementById('appToastMsg');
+        toastMsg.textContent = msg;
+        toast.classList.remove('hidden');
+        toast.classList.add('flex');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('hidden');
+          toast.classList.remove('flex');
+        }, 2800);
+      }
+
+      // Clipboard helper compatible with iframes & mobile browsers
+      function copyTextToClipboard(text, successMsg) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          if (ok) {
+            showToast(successMsg || 'কপি হয়েছে! / Copied!');
+            return true;
+          }
+        } catch (err) {
+          // fallback below
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast(successMsg || 'কপি হয়েছে! / Copied!');
+          }).catch(() => {
+            showToast('লিংকটি সিলেক্ট করে কপি করুন।');
+          });
+        } else {
+          showToast('লিংকটি সিলেক্ট করে কপি করুন।');
+        }
+        return false;
+      }
+
+      // Get clean base URL (supports custom URL entered in Share Modal)
+      function getBaseAppUrl() {
+        const customInput = document.getElementById('shareUrlInput');
+        if (customInput && customInput.value.trim()) {
+          return customInput.value.trim().split('?')[0];
+        }
+        try {
+          const href = window.location.href;
+          if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+            return href.split('?')[0].split('#')[0];
+          }
+        } catch (e) {}
+        return '';
+      }
+
+      function buildSeatDeepLink(student) {
+        const base = getBaseAppUrl();
+        const params = `?room=${encodeURIComponent(student.room)}&side=${encodeURIComponent(student.side)}&bench=${student.bench}&seat=${student.seat}`;
+        return base ? `${base}${params}` : params;
+      }
+
+      // Generate QR code with QRCode.js and automatic online image fallback
+      function renderQrCode(containerEl, urlText, size) {
+        if (!containerEl) return;
+        containerEl.innerHTML = '';
+        const valueToEncode = urlText || 'MANSUKA L. N. HIGH SCHOOL (H.S.) - Exam Seat Finder 2026';
+        try {
+          if (typeof QRCode !== 'undefined') {
+            new QRCode(containerEl, {
+              text: valueToEncode,
+              width: size,
+              height: size,
+              colorDark: '#0f2b66',
+              colorLight: '#ffffff',
+              correctLevel: QRCode.CorrectLevel.M,
+            });
+            return;
+          }
+        } catch (e) {
+          // Fall through to fallback image
+        }
+        const img = document.createElement('img');
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(valueToEncode)}`;
+        img.alt = 'QR Code';
+        img.width = size;
+        img.height = size;
+        img.className = 'rounded-lg';
+        containerEl.appendChild(img);
+      }
+
+      // =========================================================================
+      // 6. DOM REFERENCES
+      // =========================================================================
+      const tabRollBtn = document.getElementById('tabRollBtn');
+      const tabNameBtn = document.getElementById('tabNameBtn');
+      const tabRoomsBtn = document.getElementById('tabRoomsBtn');
+      const panelRoll = document.getElementById('panelRoll');
+      const panelName = document.getElementById('panelName');
+      const panelRooms = document.getElementById('panelRooms');
+
+      const classSelect = document.getElementById('classSelect');
+      const secSelect = document.getElementById('secSelect');
+      const rollInput = document.getElementById('rollInput');
+      const rollSearchForm = document.getElementById('rollSearchForm');
+      const rollSearchFeedback = document.getElementById('rollSearchFeedback');
+
+      const nameSearchInput = document.getElementById('nameSearchInput');
+      const clearNameBtn = document.getElementById('clearNameBtn');
+      const nameSuggestions = document.getElementById('nameSuggestions');
+
+      const boysRoomBtns = document.getElementById('boysRoomBtns');
+      const girlsRoomBtns = document.getElementById('girlsRoomBtns');
+
+      const seatSummarySection = document.getElementById('seatSummarySection');
+      const seatMapSection = document.getElementById('seatMapSection');
+      const classroomGrid = document.getElementById('classroomGrid');
+      const seatInspectorBar = document.getElementById('seatInspectorBar');
+
+      const routineModeClassBtn = document.getElementById('routineModeClassBtn');
+      const routineModeAllBtn = document.getElementById('routineModeAllBtn');
+      const routineClassPills = document.getElementById('routineClassPills');
+      const routineContent = document.getElementById('routineContent');
+
+      // =========================================================================
+      // 7. TAB SWITCHING
+      // =========================================================================
+      function switchSearchTab(tab) {
+        const activeCls = 'flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-[#0f2b66] text-white shadow-sm';
+        const idleCls = 'flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-white hover:text-[#0f2b66]';
+
+        tabRollBtn.className = tab === 'roll' ? activeCls : idleCls;
+        tabNameBtn.className = tab === 'name' ? activeCls : idleCls;
+        tabRoomsBtn.className = tab === 'rooms' ? activeCls : idleCls;
+
+        panelRoll.classList.toggle('hidden', tab !== 'roll');
+        panelName.classList.toggle('hidden', tab !== 'name');
+        panelRooms.classList.toggle('hidden', tab !== 'rooms');
+
+        if (tab === 'name') {
+          setTimeout(() => nameSearchInput.focus(), 50);
+        }
+      }
+
+      tabRollBtn.addEventListener('click', () => switchSearchTab('roll'));
+      tabNameBtn.addEventListener('click', () => switchSearchTab('name'));
+      tabRoomsBtn.addEventListener('click', () => switchSearchTab('rooms'));
+
+      // =========================================================================
+      // 8. DYNAMIC SECTION DROPDOWN
+      // =========================================================================
+      function populateSections(cls) {
+        const secs = Array.from(CLASS_SECTIONS[cls] || []).sort();
+        secSelect.innerHTML = secs
+          .map((s) => `<option value="${s}">Section ${s}</option>`)
+          .join('');
+      }
+
+      classSelect.addEventListener('change', () => {
+        populateSections(classSelect.value);
+        rollSearchFeedback.classList.add('hidden');
+        // Also update routine preview if no student is currently selected
+        if (!state.selectedStudent) {
+          state.routineClass = classSelect.value;
+          renderRoutine();
+        }
+      });
+
+      // =========================================================================
+      // 9. ROLL NUMBER SEARCH (WITH DUPLICATE HANDLING)
+      // =========================================================================
+      rollSearchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const cls = classSelect.value;
+        const sec = secSelect.value;
+        const rollVal = parseInt(rollInput.value.trim(), 10);
+
+        if (!rollVal || isNaN(rollVal)) {
+          showRollFeedback('Please enter a valid Roll Number.', 'error');
+          return;
+        }
+
+        const matches = ALL_STUDENTS.filter(
+          (st) => st.cls === cls && st.sec === sec && st.roll === rollVal
+        );
+
+        if (matches.length === 0) {
+          showRollFeedback(
+            `No student found for Class ${cls}, Section ${sec}, Roll ${rollVal}. Please check your details or try searching by Name.`,
+            'error'
+          );
+          return;
+        }
+
+        if (matches.length === 1) {
+          rollSearchFeedback.classList.add('hidden');
+          selectStudent(matches[0], true);
+          return;
+        }
+
+        // Multiple students share the same Class + Section + Roll (e.g., Boys & Girls or duplicates)
+        rollSearchFeedback.classList.remove('hidden');
+        rollSearchFeedback.innerHTML = `
+          <div class="rounded-xl bg-amber-50 border border-amber-300 p-3">
+            <p class="text-xs font-extrabold text-amber-900 mb-2">
+              ${matches.length} students found for Class ${cls}-${sec}, Roll ${rollVal}. Please tap your name:
+              <span class="font-bengali font-semibold block text-amber-800 mt-0.5">একই রোলে একাধিক ছাত্র/ছাত্রী পাওয়া গেছে, তোমার নামে ট্যাপ করো:</span>
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              ${matches
+                .map(
+                  (m) => `
+                <button
+                  type="button"
+                  data-pick-uid="${m.uid}"
+                  class="pick-dup-btn text-left bg-white hover:bg-blue-50 border border-amber-200 hover:border-[#1d4ed8] rounded-xl p-2.5 transition flex items-center justify-between gap-2 shadow-sm"
+                >
+                  <div>
+                    <div class="text-sm font-extrabold text-[#0f2b66]">${escapeHtml(m.name)}</div>
+                    <div class="text-xs font-semibold text-slate-500">Class ${m.cls}-${m.sec} • Roll ${m.roll} • ${m.category}</div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-lg bg-[#0f2b66] text-white text-xs font-extrabold shrink-0">Room ${m.room}</span>
+                </button>
+              `
+                )
+                .join('')}
+            </div>
+          </div>
+        `;
+
+        rollSearchFeedback.querySelectorAll('.pick-dup-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const uid = parseInt(btn.getAttribute('data-pick-uid'), 10);
+            const chosen = ALL_STUDENTS.find((s) => s.uid === uid);
+            if (chosen) {
+              rollSearchFeedback.classList.add('hidden');
+              selectStudent(chosen, true);
+            }
+          });
+        });
+      });
+
+      function showRollFeedback(msg, type) {
+        rollSearchFeedback.classList.remove('hidden');
+        const colorCls =
+          type === 'error'
+            ? 'bg-rose-50 border-rose-200 text-rose-800'
+            : 'bg-blue-50 border-blue-200 text-blue-800';
+        rollSearchFeedback.innerHTML = `
+          <div class="rounded-xl border px-3.5 py-2.5 text-xs sm:text-sm font-semibold ${colorCls}">
+            ${escapeHtml(msg)}
+          </div>
+        `;
+      }
+
+      // =========================================================================
+      // 10. LIVE NAME SEARCH
+      // =========================================================================
+      nameSearchInput.addEventListener('input', () => {
+        const q = nameSearchInput.value.trim().toLowerCase();
+        clearNameBtn.classList.toggle('hidden', q.length === 0);
+
+        if (q.length < 2) {
+          nameSuggestions.classList.add('hidden');
+          nameSuggestions.innerHTML = '';
+          return;
+        }
+
+        const results = ALL_STUDENTS.filter((st) => st.nameLower.includes(q)).slice(0, 30);
+
+        nameSuggestions.classList.remove('hidden');
+        if (results.length === 0) {
+          nameSuggestions.innerHTML = `
+            <div class="p-4 text-center text-xs sm:text-sm text-slate-500 font-medium">
+              No student found matching "<span class="font-bold text-slate-700">${escapeHtml(nameSearchInput.value.trim())}</span>".
+            </div>
+          `;
+          return;
+        }
+
+        nameSuggestions.innerHTML = results
+          .map(
+            (st) => `
+          <button
+            type="button"
+            data-uid="${st.uid}"
+            class="name-result-item w-full text-left px-3.5 py-2.5 hover:bg-blue-50 transition flex items-center justify-between gap-2"
+          >
+            <div class="min-w-0">
+              <div class="text-sm font-bold text-[#0f2b66] truncate">${escapeHtml(st.name)}</div>
+              <div class="text-xs text-slate-500 font-medium">
+                Class <span class="font-bold text-slate-700">${st.cls}-${st.sec}</span> • Roll <span class="font-bold text-slate-700">${st.roll}</span> •
+                <span class="${st.categoryCode === 'B' ? 'text-blue-600' : 'text-rose-600'} font-bold">${st.category}</span>
+              </div>
+            </div>
+            <div class="shrink-0 text-right">
+              <span class="inline-block bg-[#eff6ff] text-[#1d4ed8] border border-blue-200 text-xs font-extrabold px-2.5 py-1 rounded-lg">
+                Room ${st.room}
+              </span>
+            </div>
+          </button>
+        `
+          )
+          .join('');
+
+        nameSuggestions.querySelectorAll('.name-result-item').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const uid = parseInt(btn.getAttribute('data-uid'), 10);
+            const st = ALL_STUDENTS.find((x) => x.uid === uid);
+            if (st) {
+              nameSuggestions.classList.add('hidden');
+              nameSearchInput.value = st.name;
+              clearNameBtn.classList.remove('hidden');
+              selectStudent(st, true);
+            }
+          });
+        });
+      });
+
+      clearNameBtn.addEventListener('click', () => {
+        nameSearchInput.value = '';
+        clearNameBtn.classList.add('hidden');
+        nameSuggestions.classList.add('hidden');
+        nameSearchInput.focus();
+      });
+
+      // =========================================================================
+      // 11. ROOM BROWSER BUTTONS
+      // =========================================================================
+      function renderRoomBrowser() {
+        const makeBtn = (roomId, isBoys) => {
+          const info = ROOM_MAP[roomId];
+          const isActive = state.activeRoom === roomId;
+          const base = isBoys
+            ? isActive
+              ? 'bg-[#0f2b66] text-white border-[#0f2b66] shadow-md'
+              : 'bg-blue-50/70 hover:bg-blue-100 text-[#0f2b66] border-blue-200'
+            : isActive
+              ? 'bg-rose-600 text-white border-rose-600 shadow-md'
+              : 'bg-rose-50/70 hover:bg-rose-100 text-rose-900 border-rose-200';
+          return `
+            <button
+              type="button"
+              data-room="${roomId}"
+              class="room-pick-btn rounded-xl border py-2 px-2 text-center transition active:scale-95 ${base}"
+            >
+              <div class="text-sm font-extrabold leading-tight">${roomId}</div>
+              <div class="text-[10px] font-semibold opacity-75 mt-0.5">${info.totalStudents} seats</div>
+            </button>
+          `;
+        };
+
+        boysRoomBtns.innerHTML = BOYS_ROOMS.map((r) => makeBtn(r, true)).join('');
+        girlsRoomBtns.innerHTML = GIRLS_ROOMS.map((r) => makeBtn(r, false)).join('');
+
+        document.querySelectorAll('.room-pick-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const rId = btn.getAttribute('data-room');
+            state.selectedStudent = null;
+            state.activeRoom = rId;
+            seatSummarySection.classList.add('hidden');
+            renderRoomBrowser();
+            renderRoomMap(rId, null);
+            seatMapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+      }
+
+      // =========================================================================
+      // 12. SELECT STUDENT & RENDER SUMMARY + MAP + CLASS ROUTINE
+      // =========================================================================
+      function selectStudent(student, shouldScroll) {
+        state.selectedStudent = student;
+        state.activeRoom = student.room;
+        state.routineClass = student.cls;
+        state.routineMode = 'class';
+
+        // Sync form dropdowns cleanly
+        classSelect.value = student.cls;
+        populateSections(student.cls);
+        secSelect.value = student.sec;
+        rollInput.value = student.roll;
+
+        renderStudentSummary(student);
+        renderRoomBrowser();
+        renderRoomMap(student.room, student.uid);
+        renderRoutine();
+
+        // Update browser URL cleanly with deep-link parameters (safe inside iframes)
+        try {
+          if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            const newUrl = `${window.location.pathname}?room=${encodeURIComponent(student.room)}&side=${encodeURIComponent(student.side)}&bench=${student.bench}&seat=${student.seat}`;
+            window.history.replaceState(null, '', newUrl);
+          }
+        } catch (e) {}
+
+        if (shouldScroll) {
+          setTimeout(() => {
+            seatSummarySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 80);
+        }
+      }
+
+      function renderStudentSummary(student) {
+        const roomData = ROOM_MAP[student.room];
+        const benchKey = `${student.side}-${student.bench}`;
+        const benchMates = roomData.benches[benchKey] || [student];
+        const totalOnBench = benchMates.length;
+
+        document.getElementById('summaryName').textContent = student.name;
+        document.getElementById('summaryClass').textContent = `Class ${student.cls}`;
+        document.getElementById('summarySec').textContent = student.sec;
+        document.getElementById('summaryRoll').textContent = student.roll;
+        document.getElementById('summaryTiming').textContent = EXAM_TIMINGS[student.cls] || '—';
+
+        const catBadge = document.getElementById('summaryCategoryBadge');
+        catBadge.textContent = student.categoryCode === 'B' ? 'Boys • ছাত্র' : 'Girls • ছাত্রী';
+
+        document.getElementById('summaryRoom').textContent = student.room;
+
+        const isLeft = student.side === 'L';
+        document.getElementById('summarySideEn').textContent = isLeft ? 'Left Row' : 'Right Row';
+        document.getElementById('summarySideBn').textContent = isLeft ? 'বাম সারি (Left)' : 'ডান সারি (Right)';
+
+        document.getElementById('summaryBenchEn').textContent = `${getOrdinal(student.bench)} Bench`;
+        document.getElementById('summaryBenchBn').textContent = `সামনে থেকে ${toBengaliNum(student.bench)} নম্বর বেঞ্চ`;
+
+        document.getElementById('summarySeatEn').textContent = `Seat ${student.seat} of ${totalOnBench}`;
+        document.getElementById('summarySeatPos').textContent = getSeatPositionLabel(student.seat, totalOnBench);
+
+        document.getElementById('benchCapacityBadge').textContent = `${totalOnBench} Seats on this Bench`;
+
+        // Render Benchmates
+        const benchmatesGrid = document.getElementById('benchmatesGrid');
+        benchmatesGrid.innerHTML = benchMates
+          .map((mate) => {
+            const isMe = mate.uid === student.uid;
+            return `
+              <div class="rounded-xl p-2.5 border transition ${
+                isMe
+                  ? 'bg-amber-100/90 border-amber-400 ring-2 ring-amber-300'
+                  : 'bg-white border-slate-200 hover:border-blue-300 cursor-pointer'
+              }" data-mate-uid="${mate.uid}">
+                <div class="flex items-center justify-between gap-1 mb-1">
+                  <span class="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded ${
+                    isMe ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-600'
+                  }">
+                    Seat ${mate.seat} ${isMe ? '• YOU' : ''}
+                  </span>
+                  <span class="text-[11px] font-extrabold text-[#1d4ed8]">${mate.cls}-${mate.sec} • #${mate.roll}</span>
+                </div>
+                <div class="text-xs font-bold text-slate-800 truncate" title="${escapeHtml(mate.name)}">
+                  ${escapeHtml(mate.name)}
+                </div>
+              </div>
+            `;
+          })
+          .join('');
+
+        // Allow clicking a benchmate card to switch to them
+        benchmatesGrid.querySelectorAll('[data-mate-uid]').forEach((card) => {
+          card.addEventListener('click', () => {
+            const uid = parseInt(card.getAttribute('data-mate-uid'), 10);
+            if (uid !== student.uid) {
+              const found = ALL_STUDENTS.find((s) => s.uid === uid);
+              if (found) selectStudent(found, false);
+            }
+          });
+        });
+
+        seatSummarySection.classList.remove('hidden');
+      }
+
+      // =========================================================================
+      // 13. RENDER VISUAL INTERACTIVE CLASSROOM FLOORPLAN
+      // =========================================================================
+      function renderRoomMap(roomId, highlightUid) {
+        const roomData = ROOM_MAP[roomId];
+        if (!roomData) return;
+
+        seatMapSection.classList.remove('hidden');
+        seatInspectorBar.classList.add('hidden');
+
+        document.getElementById('mapRoomTitle').textContent = roomId;
+        const catPill = document.getElementById('mapCategoryPill');
+        if (roomData.categoryCode === 'B') {
+          catPill.textContent = 'Boys Room • ছাত্র';
+          catPill.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800';
+        } else {
+          catPill.textContent = 'Girls Room • ছাত্রী';
+          catPill.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800';
+        }
+
+        const maxRows = Math.max(roomData.maxL, roomData.maxR);
+        let html = '';
+
+        for (let b = 1; b <= maxRows; b++) {
+          const leftSeats = roomData.benches[`L-${b}`] || [];
+          const rightSeats = roomData.benches[`R-${b}`] || [];
+
+          html += `
+            <div class="grid grid-cols-[1fr_24px_1fr] sm:grid-cols-[1fr_44px_1fr] gap-1 sm:gap-2 items-stretch">
+              ${renderBenchHTML('L', b, leftSeats, highlightUid)}
+              <div class="flex flex-col items-center justify-center">
+                <span class="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-slate-100 border border-slate-200 text-[10px] sm:text-xs font-extrabold text-slate-500 flex items-center justify-center">
+                  ${b}
+                </span>
+              </div>
+              ${renderBenchHTML('R', b, rightSeats, highlightUid)}
+            </div>
+          `;
+        }
+
+        classroomGrid.innerHTML = html;
+
+        // Attach click listeners to every seat tile
+        classroomGrid.querySelectorAll('.seat-tile').forEach((tile) => {
+          tile.addEventListener('click', () => {
+            const uid = parseInt(tile.getAttribute('data-uid'), 10);
+            const st = ALL_STUDENTS.find((x) => x.uid === uid);
+            if (st) showSeatInspector(st);
+          });
+        });
+      }
+
+      function renderBenchHTML(side, benchNum, seats, highlightUid) {
+        if (!seats || seats.length === 0) {
+          return `<div class="rounded-xl border border-dashed border-slate-200 bg-slate-50/40 min-h-[54px] flex items-center justify-center text-[10px] text-slate-300 font-semibold">—</div>`;
+        }
+
+        const hasHighlighted = seats.some((s) => s.uid === highlightUid);
+        const gridCols = seats.length === 4 ? 'grid-cols-4' : seats.length === 3 ? 'grid-cols-3' : 'grid-cols-2';
+
+        const benchWrapperCls = hasHighlighted
+          ? 'bg-amber-50/90 border-2 border-amber-400 shadow-md'
+          : 'bg-white border border-slate-200/90 shadow-sm';
+
+        return `
+          <div class="rounded-xl p-1.5 sm:p-2 ${benchWrapperCls} transition" ${hasHighlighted ? 'id="highlightedBenchRow"' : ''}>
+            <div class="flex items-center justify-between mb-1 px-0.5">
+              <span class="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wide ${hasHighlighted ? 'text-amber-800' : 'text-slate-400'}">
+                ${side === 'L' ? 'L' : 'R'}-${benchNum} (${getOrdinal(benchNum)})
+              </span>
+              ${
+                hasHighlighted
+                  ? '<span class="text-[9px] sm:text-[10px] font-extrabold bg-amber-500 text-white px-1.5 py-0.5 rounded-full">YOUR BENCH</span>'
+                  : `<span class="text-[9px] text-slate-400 font-semibold">${seats.length}S</span>`
+              }
+            </div>
+            <div class="grid ${gridCols} gap-1">
+              ${seats
+                .map((st) => {
+                  const isTarget = st.uid === highlightUid;
+                  if (isTarget) {
+                    return `
+                      <button
+                        type="button"
+                        data-uid="${st.uid}"
+                        id="highlightedSeatBtn"
+                        class="seat-tile seat-highlight-glow relative rounded-lg bg-gradient-to-b from-amber-400 to-amber-500 text-slate-950 p-1 sm:p-1.5 text-center border-2 border-amber-600 transition transform scale-[1.03] z-10"
+                        title="${escapeHtml(st.name)} (Class ${st.cls}-${st.sec}, Roll ${st.roll})"
+                      >
+                        <div class="text-[8px] sm:text-[9px] font-black uppercase leading-none text-amber-950">S${st.seat} ★</div>
+                        <div class="text-[11px] sm:text-xs font-black leading-tight mt-0.5">${st.roll}</div>
+                        <div class="text-[8px] sm:text-[9px] font-extrabold leading-none text-amber-950/90 truncate">${st.cls}-${st.sec}</div>
+                      </button>
+                    `;
+                  }
+                  return `
+                    <button
+                      type="button"
+                      data-uid="${st.uid}"
+                      class="seat-tile rounded-lg bg-blue-50/80 hover:bg-blue-100 active:bg-blue-200 border border-blue-200/80 p-1 sm:p-1.5 text-center transition"
+                      title="${escapeHtml(st.name)} (Class ${st.cls}-${st.sec}, Roll ${st.roll})"
+                    >
+                      <div class="text-[8px] sm:text-[9px] font-bold text-slate-400 leading-none">S${st.seat}</div>
+                      <div class="text-[11px] sm:text-xs font-extrabold text-[#0f2b66] leading-tight mt-0.5">${st.roll}</div>
+                      <div class="text-[8px] sm:text-[9px] font-bold text-blue-700/80 leading-none truncate">${st.cls}-${st.sec}</div>
+                    </button>
+                  `;
+                })
+                .join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      function showSeatInspector(student) {
+        state.inspectedStudent = student;
+        const benchKey = `${student.side}-${student.bench}`;
+        const totalSeats = (ROOM_MAP[student.room].benches[benchKey] || []).length;
+
+        document.getElementById('inspectorRollBadge').textContent = student.roll;
+        document.getElementById('inspectorName').textContent = student.name;
+        document.getElementById('inspectorMeta').textContent =
+          `Class ${student.cls}-${student.sec} • Room ${student.room} • ${student.side === 'L' ? 'Left' : 'Right'} Row, ${getOrdinal(student.bench)} Bench, Seat ${student.seat}/${totalSeats}`;
+
+        seatInspectorBar.classList.remove('hidden');
+      }
+
+      document.getElementById('inspectorSelectBtn').addEventListener('click', () => {
+        if (state.inspectedStudent) {
+          selectStudent(state.inspectedStudent, true);
+        }
+      });
+
+      // =========================================================================
+      // 14. RENDER EXAM ROUTINE (CLASS-SPECIFIC & FULL SCHOOL TOGGLE)
+      // =========================================================================
+      function renderRoutine() {
+        const isAll = state.routineMode === 'all';
+
+        // Update Toggle Buttons
+        routineModeClassBtn.className = !isAll
+          ? 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#0f2b66] shadow-sm'
+          : 'px-3 py-1.5 rounded-lg text-xs font-bold transition text-white hover:bg-white/10';
+        routineModeAllBtn.className = isAll
+          ? 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-white text-[#0f2b66] shadow-sm'
+          : 'px-3 py-1.5 rounded-lg text-xs font-bold transition text-white hover:bg-white/10';
+
+        routineModeClassBtn.textContent = state.selectedStudent
+          ? `My Class (Class ${state.selectedStudent.cls})`
+          : `Class ${state.routineClass} Routine`;
+
+        routineClassPills.classList.toggle('hidden', isAll);
+
+        // Update Class Pills
+        routineClassPills.querySelectorAll('.rclass-pill').forEach((pill) => {
+          const c = pill.getAttribute('data-rclass');
+          if (c === state.routineClass) {
+            pill.className = 'rclass-pill px-3 py-1 rounded-full text-xs font-extrabold transition bg-amber-400 text-slate-950 shadow-sm';
+          } else {
+            pill.className = 'rclass-pill px-3 py-1 rounded-full text-xs font-bold transition bg-white/15 text-sky-100 hover:bg-white/25';
+          }
+        });
+
+        // Highlight active timing card
+        const tV = document.getElementById('timingCardV');
+        const tMid = document.getElementById('timingCardVI_VIII');
+        const tIX = document.getElementById('timingCardIX');
+        const activeTimingCls = 'rounded-xl bg-amber-50 border-2 border-amber-400 px-3 py-2 flex items-center justify-between shadow-sm';
+        const idleTimingCls = 'rounded-xl bg-white border border-blue-200/80 px-3 py-2 flex items-center justify-between';
+
+        if (!isAll) {
+          tV.className = state.routineClass === 'V' ? activeTimingCls : idleTimingCls;
+          tMid.className = ['VI', 'VII', 'VIII'].includes(state.routineClass) ? activeTimingCls : idleTimingCls;
+          tIX.className = state.routineClass === 'IX' ? activeTimingCls : idleTimingCls;
+        } else {
+          tV.className = idleTimingCls;
+          tMid.className = idleTimingCls;
+          tIX.className = idleTimingCls;
+        }
+
+        if (!isAll) {
+          // Single-Class Clean Card/Table View
+          const cls = state.routineClass;
+          const examDays = EXAM_ROUTINE.filter((row) => row[cls] !== '—');
+          const rowsHtml = EXAM_ROUTINE.map((row) => {
+            const subj = row[cls];
+            const isOff = subj === '—';
+            return `
+              <tr class="${isOff ? 'bg-slate-50/70 text-slate-400' : 'bg-white hover:bg-blue-50/50'} transition">
+                <td class="py-3 px-3 sm:px-4 font-extrabold text-xs sm:text-sm ${isOff ? 'text-slate-400' : 'text-[#0f2b66]'} whitespace-nowrap">
+                  <div>${row.date}</div>
+                  <div class="text-[11px] font-semibold ${isOff ? 'text-slate-400' : 'text-slate-500'}">
+                    ${row.day} <span class="font-bengali">(${row.dayBn})</span>
+                  </div>
+                </td>
+                <td class="py-3 px-3 sm:px-4">
+                  ${
+                    isOff
+                      ? '<span class="inline-block text-xs font-semibold text-slate-400 italic">No Exam • ছুটি</span>'
+                      : `<span class="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-slate-900">
+                           <span class="w-2 h-2 rounded-full bg-[#1d4ed8] shrink-0"></span>
+                           ${escapeHtml(subj)}
+                         </span>`
+                  }
+                </td>
+                <td class="py-3 px-3 sm:px-4 text-right text-xs font-bold ${isOff ? 'text-slate-300' : 'text-emerald-700'} whitespace-nowrap hidden sm:table-cell">
+                  ${isOff ? '—' : EXAM_TIMINGS[cls]}
+                </td>
+              </tr>
+            `;
+          }).join('');
+
+          routineContent.innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="text-xs sm:text-sm font-extrabold text-[#0f2b66]">
+                Class ${cls} Exam Schedule <span class="font-bengali font-semibold text-slate-500">(মোট ${toBengaliNum(examDays.length)}টি পরীক্ষা)</span>
+              </div>
+              <span class="text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full">
+                Timing: ${EXAM_TIMINGS[cls]}
+              </span>
+            </div>
+            <div class="overflow-hidden rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-[#eff6ff] border-b border-blue-200 text-[11px] font-extrabold uppercase tracking-wider text-[#0f2b66]">
+                    <th class="py-2.5 px-3 sm:px-4">Date &amp; Day</th>
+                    <th class="py-2.5 px-3 sm:px-4">Subject (Class ${cls})</th>
+                    <th class="py-2.5 px-3 sm:px-4 text-right hidden sm:table-cell">Time</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          `;
+        } else {
+          // Full School Routine Table (Classes V–IX)
+          const rowsHtml = EXAM_ROUTINE.map(
+            (row, idx) => `
+            <tr class="${idx % 2 === 0 ? 'bg-white' : 'bg-[#eff6ff]/60'} hover:bg-blue-50 transition">
+              <td class="py-2.5 px-2.5 sm:px-3 font-extrabold text-[11px] sm:text-xs text-[#0f2b66] whitespace-nowrap border-r border-slate-100">
+                <div>${row.date}</div>
+                <div class="text-[10px] font-semibold text-slate-500 uppercase">${row.day}</div>
+              </td>
+              ${['V', 'VI', 'VII', 'VIII', 'IX']
+                .map((c) => {
+                  const val = row[c];
+                  const isHighlightCol = state.selectedStudent && state.selectedStudent.cls === c;
+                  return `<td class="py-2.5 px-2 text-center text-[11px] sm:text-xs ${
+                    val === '—' ? 'text-slate-300 font-semibold' : 'text-slate-800 font-bold'
+                  } ${isHighlightCol ? 'bg-amber-50/70' : ''}">${escapeHtml(val)}</td>`;
+                })
+                .join('')}
+            </tr>
+          `
+          ).join('');
+
+          routineContent.innerHTML = `
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full min-w-[600px] text-left border-collapse">
+                <thead>
+                  <tr class="bg-[#1d4ed8] text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider">
+                    <th class="py-2.5 px-3">Date &amp; Day</th>
+                    <th class="py-2.5 px-2 text-center">Class V</th>
+                    <th class="py-2.5 px-2 text-center">Class VI</th>
+                    <th class="py-2.5 px-2 text-center">Class VII</th>
+                    <th class="py-2.5 px-2 text-center">Class VIII</th>
+                    <th class="py-2.5 px-2 text-center">Class IX</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200/70">
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          `;
+        }
+      }
+
+      // Routine Controls
+      routineModeClassBtn.addEventListener('click', () => {
+        state.routineMode = 'class';
+        if (state.selectedStudent) state.routineClass = state.selectedStudent.cls;
+        renderRoutine();
+      });
+
+      routineModeAllBtn.addEventListener('click', () => {
+        state.routineMode = 'all';
+        renderRoutine();
+      });
+
+      routineClassPills.querySelectorAll('.rclass-pill').forEach((pill) => {
+        pill.addEventListener('click', () => {
+          state.routineClass = pill.getAttribute('data-rclass');
+          state.routineMode = 'class';
+          renderRoutine();
+        });
+      });
+
+      // Print Seat Slip Button
+      document.getElementById('printSlipBtn').addEventListener('click', () => {
+        if (state.selectedStudent) {
+          state.routineMode = 'class';
+          state.routineClass = state.selectedStudent.cls;
+          renderRoutine();
+        }
+        document.body.classList.remove('print-mode-poster');
+        document.body.classList.add('print-mode-slip');
+        window.print();
+      });
+
+      // =========================================================================
+      // 14B. EASY SHARING SUITE (APP MODAL, WHATSAPP, DEEP-LINK, QR POSTER)
+      // =========================================================================
+      const shareModal = document.getElementById('shareModal');
+      const shareUrlInput = document.getElementById('shareUrlInput');
+      const localFileHint = document.getElementById('localFileHint');
+      const shareTabLinksBtn = document.getElementById('shareTabLinksBtn');
+      const shareTabQrBtn = document.getElementById('shareTabQrBtn');
+      const sharePanelLinks = document.getElementById('sharePanelLinks');
+      const sharePanelQr = document.getElementById('sharePanelQr');
+      const modalQrContainer = document.getElementById('modalQrContainer');
+      const posterQrContainer = document.getElementById('posterQrContainer');
+      const posterUrlText = document.getElementById('posterUrlText');
+      const posterLogoImg = document.getElementById('posterLogoImg');
+
+      // Copy school logo into printable poster
+      const schoolLogoImg = document.getElementById('schoolLogoImg');
+      if (schoolLogoImg && posterLogoImg) {
+        posterLogoImg.src = schoolLogoImg.src;
+      }
+
+      function initShareUrl() {
+        try {
+          const href = window.location.href;
+          if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+            shareUrlInput.value = href.split('?')[0].split('#')[0];
+            localFileHint.classList.add('hidden');
+          } else {
+            shareUrlInput.value = '';
+            localFileHint.classList.remove('hidden');
+          }
+        } catch (e) {
+          localFileHint.classList.remove('hidden');
+        }
+      }
+
+      function getAppShareMessage() {
+        const url = shareUrlInput.value.trim() || getBaseAppUrl();
+        return [
+          '🏫 *MANSUKA L. N. HIGH SCHOOL (H.S.)*',
+          'মনসুকা লক্ষ্মীনারায়ণ উচ্চ বিদ্যালয় (উঃ মাঃ)',
+          '📋 *Annual / 3rd Summative Evaluation – 2026*',
+          '',
+          'তোমার পরীক্ষার রুম নং, বেঞ্চের অবস্থান ও সম্পূর্ণ রুটিন জানতে নিচের লিংকে ক্লিক করো:',
+          url ? `🔗 ${url}` : '(অ্যাপ লিংক এখানে যুক্ত করুন)',
+          '',
+          '✅ Class, Section ও Roll No. অথবা নাম দিয়ে সহজেই সিট খুঁজে পাবে।',
+        ].join('\n');
+      }
+
+      function refreshQrDisplays() {
+        const url = shareUrlInput.value.trim() || getBaseAppUrl();
+        renderQrCode(modalQrContainer, url, 176);
+        renderQrCode(posterQrContainer, url, 260);
+        posterUrlText.textContent = url || 'Mansuka L. N. High School (H.S.) — Exam Seat Finder 2026';
+      }
+
+      function openShareModal(defaultTab) {
+        if (!shareUrlInput.value.trim()) initShareUrl();
+        shareModal.classList.remove('hidden');
+        shareModal.classList.add('flex');
+        switchShareModalTab(defaultTab || 'links');
+        refreshQrDisplays();
+      }
+
+      function closeShareModal() {
+        shareModal.classList.add('hidden');
+        shareModal.classList.remove('flex');
+      }
+
+      function switchShareModalTab(tab) {
+        const activeCls = 'py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition bg-[#0f2b66] text-white shadow-sm';
+        const idleCls = 'py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition text-slate-600 hover:bg-white hover:text-[#0f2b66]';
+        shareTabLinksBtn.className = tab === 'links' ? activeCls : idleCls;
+        shareTabQrBtn.className = tab === 'qr' ? activeCls : idleCls;
+        sharePanelLinks.classList.toggle('hidden', tab !== 'links');
+        sharePanelQr.classList.toggle('hidden', tab !== 'qr');
+        if (tab === 'qr') refreshQrDisplays();
+      }
+
+      document.getElementById('headerShareBtn').addEventListener('click', () => openShareModal('links'));
+      document.getElementById('floatingShareBtn').addEventListener('click', () => openShareModal('links'));
+      document.getElementById('closeShareModalBtn').addEventListener('click', closeShareModal);
+      shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) closeShareModal();
+      });
+
+      shareTabLinksBtn.addEventListener('click', () => switchShareModalTab('links'));
+      shareTabQrBtn.addEventListener('click', () => switchShareModalTab('qr'));
+
+      shareUrlInput.addEventListener('input', () => {
+        refreshQrDisplays();
+      });
+
+      // Modal: Copy Link
+      document.getElementById('modalCopyLinkBtn').addEventListener('click', () => {
+        const url = shareUrlInput.value.trim() || getBaseAppUrl();
+        if (!url) {
+          showToast('আগে উপরে আপনার ওয়েব অ্যাপের লিংকটি দিন।');
+          shareUrlInput.focus();
+          return;
+        }
+        copyTextToClipboard(url, 'লিংক কপি হয়েছে! / Link Copied!');
+      });
+
+      // Modal: WhatsApp Share
+      document.getElementById('modalWhatsAppBtn').addEventListener('click', () => {
+        const msg = getAppShareMessage();
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+      });
+
+      // Modal: Native Mobile Share (fallback to Copy Message)
+      document.getElementById('modalNativeShareBtn').addEventListener('click', async () => {
+        const msg = getAppShareMessage();
+        const url = shareUrlInput.value.trim() || getBaseAppUrl();
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'MANSUKA L. N. HIGH SCHOOL (H.S.) — Exam Seat Finder 2026',
+              text: msg,
+              url: url || undefined,
+            });
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+          }
+        }
+        copyTextToClipboard(msg, 'মেসেজ কপি হয়েছে! এখন যেকোনো অ্যাপে পেস্ট করুন।');
+      });
+
+      // Modal: Copy Full Notice Message
+      document.getElementById('modalCopyMessageBtn').addEventListener('click', () => {
+        copyTextToClipboard(getAppShareMessage(), 'সম্পূর্ণ নোটিশ মেসেজ কপি হয়েছে!');
+      });
+
+      // Modal: Print A4 Notice Board QR Poster
+      document.getElementById('printQrPosterBtn').addEventListener('click', () => {
+        refreshQrDisplays();
+        document.body.classList.remove('print-mode-slip');
+        document.body.classList.add('print-mode-poster');
+        setTimeout(() => {
+          window.print();
+        }, 120);
+      });
+
+      window.addEventListener('afterprint', () => {
+        document.body.classList.remove('print-mode-poster');
+      });
+
+      // Per-Student: WhatsApp Share Seat Card
+      document.getElementById('shareSeatWhatsAppBtn').addEventListener('click', () => {
+        const st = state.selectedStudent;
+        if (!st) return;
+        const roomData = ROOM_MAP[st.room];
+        const totalOnBench = (roomData.benches[`${st.side}-${st.bench}`] || [st]).length;
+        const sideLabel = st.side === 'L' ? 'Left Row (বাম সারি)' : 'Right Row (ডান সারি)';
+        const seatLink = buildSeatDeepLink(st);
+        const msg = [
+          '🏫 *MANSUKA L. N. HIGH SCHOOL (H.S.)*',
+          '📋 *Annual / 3rd Summative Evaluation – 2026*',
+          '━━━━━━━━━━━━━━━━━━',
+          `👤 *Name:* ${st.name}`,
+          `🎓 *Class:* ${st.cls} | *Sec:* ${st.sec} | *Roll:* ${st.roll}`,
+          `🚪 *Room No.:* ${st.room} (${st.category})`,
+          `📍 *Position:* ${sideLabel}, ${getOrdinal(st.bench)} Bench, Seat ${st.seat} of ${totalOnBench}`,
+          `⏰ *Exam Time:* ${EXAM_TIMINGS[st.cls]}`,
+          '━━━━━━━━━━━━━━━━━━',
+          seatLink.startsWith('http') ? `🔗 Direct Seat & Routine Link:\n${seatLink}` : '',
+        ].filter(Boolean).join('\n');
+
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+      });
+
+      // Per-Student: Copy Direct Seat Deep-Link
+      document.getElementById('copySeatLinkBtn').addEventListener('click', () => {
+        const st = state.selectedStudent;
+        if (!st) return;
+        const link = buildSeatDeepLink(st);
+        copyTextToClipboard(link, `${st.name}-এর ডিরেক্ট সিট লিংক কপি হয়েছে!`);
+      });
+
+      // =========================================================================
+      // 14C. URL DEEP-LINK HANDLER ON PAGE LOAD
+      // Supports: ?room=3.4&side=L&bench=1&seat=1 OR ?class=V&sec=A&roll=2
+      // =========================================================================
+      function handleDeepLinkOnLoad() {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const qRoom = params.get('room');
+          const qSide = params.get('side');
+          const qBench = parseInt(params.get('bench'), 10);
+          const qSeat = parseInt(params.get('seat'), 10);
+
+          if (qRoom && qSide && !isNaN(qBench) && !isNaN(qSeat)) {
+            const match = ALL_STUDENTS.find(
+              (s) => s.room === qRoom && s.side === qSide.toUpperCase() && s.bench === qBench && s.seat === qSeat
+            );
+            if (match) {
+              selectStudent(match, true);
+              return;
+            }
+          }
+
+          const qCls = params.get('class');
+          const qSec = params.get('sec');
+          const qRoll = parseInt(params.get('roll'), 10);
+          if (qCls && qSec && !isNaN(qRoll)) {
+            const match = ALL_STUDENTS.find(
+              (s) => s.cls === qCls.toUpperCase() && s.sec === qSec.toUpperCase() && s.roll === qRoll
+            );
+            if (match) {
+              selectStudent(match, true);
+            }
+          }
+        } catch (e) {}
+      }
+
+      // =========================================================================
+      // 15. INITIALIZATION
+      // =========================================================================
+      initShareUrl();
+      populateSections(classSelect.value);
+      renderRoomBrowser();
+      renderRoutine();
+      handleDeepLinkOnLoad();
+    })();
+  </script>
+</body>
+</html>
+```
