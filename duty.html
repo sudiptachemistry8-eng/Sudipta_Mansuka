@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invigilator Duty Chart 2026 | MANSUKA L. N. HIGH SCHOOL (H.S.)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Hind Siliguri', 'sans-serif'],
+            bengali: ['Hind Siliguri', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom print styling for clean A4 printing */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .print-shadow-none {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+    }
+    /* Smooth custom scrollbar for horizontal tables */
+    ::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+  <!-- Toast Notification Box (Replaces alert/confirm) -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform translate-y-4">
+    <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-2.5 text-sm font-medium border border-slate-700">
+      <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+      </svg>
+      <span id="toast-message">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Top Institutional Header -->
+  <header class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-blue-900 text-white shadow-md">
+    <div class="max-w-4xl mx-auto px-4 py-5 sm:py-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-700/70 border border-indigo-500/40 text-indigo-100 text-xs font-medium mb-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>3rd Summative Evaluation – 2026</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
+            MANSUKA L. N. HIGH SCHOOL (H.S.)
+          </h1>
+          <p class="text-indigo-200 text-xs sm:text-sm font-medium mt-0.5">
+            Invigilator Duty Chart • <span class="font-bengali">পরীক্ষার ডিউটি তালিকা</span>
+          </p>
+        </div>
+
+        <!-- Exam Timing & Reliever Rule Badges -->
+        <div class="flex flex-wrap sm:flex-col items-start sm:items-end gap-1.5 text-xs">
+          <div class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15 font-semibold text-white">
+            <svg class="w-3.5 h-3.5 text-amber-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>11:30 AM – 02:30 PM</span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 bg-amber-400/20 text-amber-200 px-2.5 py-1 rounded-lg border border-amber-300/30 font-medium">
+            <span>All Reliever Duty: <strong>40 Mins</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Primary Navigation Tabs -->
+  <div class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm no-print">
+    <div class="max-w-4xl mx-auto px-4">
+      <nav class="flex gap-2 py-2" aria-label="Views">
+        <button id="tab-teacher" onclick="switchTab('teacher')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-indigo-600 text-white shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+          <span>My Duty <span class="font-bengali font-normal opacity-90">(নিজের ডিউটি)</span></span>
+        </button>
+        <button id="tab-date" onclick="switchTab('date')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span>Full Chart <span class="font-bengali font-normal opacity-90">(তারিখ অনুযায়ী)</span></span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-5 sm:py-6 space-y-5">
+
+    <!-- ========================================================= -->
+    <!-- VIEW 1: TEACHER-WISE INDIVIDUAL DUTY VIEW                 -->
+    <!-- ========================================================= -->
+    <section id="view-teacher" class="space-y-5">
+
+      <!-- Teacher Selector & Search Card -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 no-print">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <label for="teacher-select" class="block text-sm font-bold text-slate-800">
+            Select Teacher Initials <span class="font-bengali font-medium text-slate-500">(আপনার নামের সংক্ষিপ্ত রূপ বেছে নিন)</span>
+          </label>
+          <span id="saved-badge" class="hidden inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Saved on this device
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+          <!-- Instant Filter Input -->
+          <div class="sm:col-span-5 relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="teacher-search"
+              placeholder="Type initials (e.g. S.SING, NP)..."
+              autocomplete="off"
+              class="w-full pl-10 pr-8 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold uppercase placeholder:normal-case placeholder:font-normal text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+            />
+            <button id="clear-search-btn" onclick="clearSearch()" title="Clear search" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Dropdown Selector -->
+          <div class="sm:col-span-7 relative">
+            <select
+              id="teacher-select"
+              onchange="handleTeacherChange(this.value)"
+              class="w-full appearance-none pl-4 pr-10 py-3 bg-indigo-50/60 border border-indigo-200 rounded-xl text-sm sm:text-base font-bold text-indigo-950 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer transition-all"
+            >
+              <option value="">-- Choose Your Initials (তালিকা থেকে বেছে নিন) --</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-indigo-700">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Tap Chips for filtered or popular initials -->
+        <div id="quick-chips-container" class="mt-3 pt-3 border-t border-slate-100">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium text-slate-500">Quick Tap Initials <span class="font-bengali">(দ্রুত বাছাই করুন)</span>:</span>
+            <span id="teacher-count-label" class="text-xs text-slate-400 font-medium">35 Teachers</span>
+          </div>
+          <div id="teacher-chips" class="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto pr-1">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State Prompt (Shown before a teacher is selected) -->
+      <div id="teacher-empty-state" class="bg-white rounded-2xl p-8 text-center border border-dashed border-slate-300 shadow-sm">
+        <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+          </svg>
+        </div>
+        <h2 class="text-base sm:text-lg font-bold text-slate-800">Select Your Initials Above</h2>
+        <p class="text-sm text-slate-500 max-w-md mx-auto mt-1 font-bengali">
+          উপরের তালিকা থেকে আপনার নামের সংক্ষিপ্ত রূপ (Initials) বেছে নিলে ৩০.১১.২০২৬ থেকে ১০.১২.২০২৬ পর্যন্ত আপনার সমস্ত পরীক্ষার ডিউটি দেখা যাবে।
+        </p>
+      </div>
+
+      <!-- Selected Teacher Dashboard (Hidden until teacher chosen) -->
+      <div id="teacher-dashboard" class="hidden space-y-5">
+
+        <!-- Today / Upcoming Exam Date Highlight Banner -->
+        <div id="upcoming-banner" class="rounded-2xl p-4 sm:p-5 border shadow-sm transition-all">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Teacher Header + Action Buttons + Duty Summary Counters -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 print-shadow-none">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-indigo-600">Invigilator Schedule</div>
+              <h2 class="text-2xl font-extrabold text-slate-900 flex items-center gap-2.5 mt-0.5">
+                <span id="selected-teacher-title">S.SING</span>
+                <span class="text-xs font-medium bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200">
+                  9 Exam Days
+                </span>
+              </h2>
+            </div>
+
+            <!-- Action Buttons (WhatsApp Share, Copy, Print) -->
+            <div class="flex flex-wrap items-center gap-2 no-print">
+              <button onclick="shareOnWhatsApp()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+                </svg>
+                <span>Share WhatsApp</span>
+              </button>
+              <button onclick="copyTeacherSchedule()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+              <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                <span>Print</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Summary Stats Grid -->
+          <div class="grid grid-cols-3 gap-2.5 sm:gap-4 pt-4">
+            <div class="bg-blue-50/80 border border-blue-100 rounded-xl p-3 text-center">
+              <div id="stat-room" class="text-xl sm:text-2xl font-extrabold text-blue-700">0</div>
+              <div class="text-[11px] sm:text-xs font-semibold text-blue-900 mt-0.5">Room Duty</div>
+              <div class="text-[10px] text-blue-600 font-bengali">রুম ডিউটি</div>
+            </div>
+            <div class="bg-amber-50/80 border border-amber-100 rounded-xl p-3 text-center">
+              <div id="stat-reliever" class="text-xl sm:text-2xl font-extrabold text-amber-700">0</div>
+              <div class="text-[11px] sm:text-xs font-semibold text-amber-900 mt-0.5">Reliever (40m)</div>
+              <div class="text-[10px] text-amber-600 font-bengali">রিলিভার ডিউটি</div>
+            </div>
+            <div class="bg-purple-50/80 border border-purple-100 rounded-xl p-3 text-center">
+              <div id="stat-reserve" class="text-xl sm:text-2xl font-extrabold text-purple-700">0</div>
+              <div class="text-[11px] sm:text-xs font-semibold text-purple-900 mt-0.5">Reserve / Q.Set</div>
+              <div class="text-[10px] text-purple-600 font-bengali">রিজার্ভ ডিউটি</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toggle: Show All Days vs Only Duty Days -->
+        <div class="flex items-center justify-between px-1 no-print">
+          <h3 class="text-sm font-bold text-slate-700">
+            Day-by-Day Schedule <span class="font-bengali font-normal text-slate-500">(তারিখ অনুযায়ী তালিকা)</span>
+          </h3>
+          <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-600 select-none">
+            <input type="checkbox" id="only-duty-toggle" onchange="renderTeacherCards()" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+            <span>Hide Free Days</span>
+          </label>
+        </div>
+
+        <!-- Chronological Cards List -->
+        <div id="duty-cards-list" class="space-y-3">
+          <!-- Populated dynamically -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VIEW 2: FULL CHART / DATE-WISE COORDINATOR VIEW           -->
+    <!-- ========================================================= -->
+    <section id="view-date" class="hidden space-y-5">
+
+      <!-- Date Selector Pills -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 no-print">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="text-base font-bold text-slate-800">Select Exam Date <span class="font-bengali font-medium text-slate-500">(পরীক্ষার তারিখ বেছে নিন)</span></h2>
+            <p class="text-xs text-slate-500">Tap any date to see room-wise invigilators, relievers, and reserve teachers.</p>
+          </div>
+          <button onclick="window.print()" class="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+            </svg>
+            <span>Print Date Chart</span>
+          </button>
+        </div>
+
+        <!-- Horizontal Scrollable Date Tabs -->
+        <div id="date-pills" class="flex gap-2 overflow-x-auto pb-2">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- Selected Date Detailed Breakdown -->
+      <div id="date-detail-container" class="space-y-4">
+        <!-- Populated via JS -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-10 py-5 px-4 text-center text-xs text-slate-500 no-print">
+    <p class="font-semibold text-slate-700">MANSUKA L. N. HIGH SCHOOL (H.S.)</p>
+    <p class="mt-0.5">3rd Summative Evaluation – 2026 • Exam Time: 11:30 AM to 02:30 PM • All Reliever Duty: 40 Minutes</p>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- APPLICATION DATA & LOGIC                                  -->
+  <!-- ========================================================= -->
+  <script>
+    // Complete, verified dataset transcribed from the official duty chart
+    const ROOM_ORDER = [
+      "1.5", "1.11", "1.12", "1.13", "1.14", "1.15",
+      "1.9", "1.10", "1.4", "2.5", "2.7", "3.1", "3.2", "3.7", "3.4"
+    ];
+
+    const DUTY_SCHEDULE = [
+      {
+        isoDate: "2026-11-30",
+        date: "30.11.26",
+        day: "MONDAY",
+        rooms: {
+          "1.5": ["AS"],
+          "1.11": ["NP"],
+          "1.12": ["JS"],
+          "1.13": ["AKG"],
+          "1.14": ["SG"],
+          "1.15": ["GR"],
+          "1.9": ["DR"],
+          "1.10": ["SP"],
+          "1.4": ["KM"],
+          "2.5": ["NB"],
+          "2.7": ["PKS"],
+          "3.1": ["AM"],
+          "3.2": ["S.PAL"],
+          "3.7": ["SKB"],
+          "3.4": ["LKR", "RKP"]
+        },
+        relievers: [
+          { teacher: "AK", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "S.ALI", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "RS", covers: ["1.9", "1.10"] },
+          { teacher: "KKC", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "S.SING", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "KH", covers: ["3.4"] }
+        ],
+        reserve: ["GPS", "SS", "ABG", "JD", "SA", "SR", "RG", "UM", "BS", "AB"]
+      },
+      {
+        isoDate: "2026-12-01",
+        date: "01.12.26",
+        day: "TUESDAY",
+        rooms: {
+          "1.5": ["KM"],
+          "1.11": ["AM"],
+          "1.12": ["KKC"],
+          "1.13": ["KH"],
+          "1.14": ["S.PAL"],
+          "1.15": ["S.SING"],
+          "1.9": ["PKS"],
+          "1.10": ["ABG"],
+          "1.4": ["AS"],
+          "2.5": ["SP"],
+          "2.7": ["AK"],
+          "3.1": ["JS"],
+          "3.2": ["AKG"],
+          "3.7": ["SG"],
+          "3.4": ["SS", "RS"]
+        },
+        relievers: [
+          { teacher: "SKB", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "AB", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "NP", covers: ["1.9", "1.10"] },
+          { teacher: "SA", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "DR", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "SR", covers: ["3.4"] }
+        ],
+        reserve: ["NB", "GPS", "LKR", "RKP", "JD", "GR", "S.ALI", "RG", "UM", "BS"]
+      },
+      {
+        isoDate: "2026-12-02",
+        date: "02.12.26",
+        day: "WEDNESDAY",
+        rooms: {
+          "1.5": ["NP"],
+          "1.11": ["AS"],
+          "1.12": ["NB"],
+          "1.13": ["SS"],
+          "1.14": ["KKC"],
+          "1.15": ["LKR"],
+          "1.9": ["RKP"],
+          "1.10": ["GR"],
+          "1.4": ["AB"],
+          "2.5": ["AK"],
+          "2.7": ["DR"],
+          "3.1": ["RG"],
+          "3.2": ["KH"],
+          "3.7": ["SA"],
+          "3.4": ["AKG", "SG"]
+        },
+        relievers: [
+          { teacher: "ABG", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "PKS", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "SR", covers: ["1.9", "1.10"] },
+          { teacher: "RS", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "AM", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "S.SING", covers: ["3.4"] }
+        ],
+        reserve: ["KM", "GPS", "SKB", "JD", "JS", "S.ALI", "SP", "S.PAL", "UM", "BS"]
+      },
+      {
+        isoDate: "2026-12-03",
+        date: "03.12.26",
+        day: "THURSDAY",
+        rooms: {
+          "1.5": ["RKP"],
+          "1.11": ["RG"],
+          "1.12": ["AS"],
+          "1.13": ["SKB"],
+          "1.14": ["LKR"],
+          "1.15": ["SG"],
+          "1.9": ["S.ALI"],
+          "1.10": ["NB"],
+          "1.4": ["AK"],
+          "2.5": ["SA"],
+          "2.7": ["JS"],
+          "3.1": ["RS"],
+          "3.2": ["DR"],
+          "3.7": ["KH"],
+          "3.4": ["AM", "S.PAL"]
+        },
+        relievers: [
+          { teacher: "GR", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "ABG", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "BS", covers: ["1.9", "1.10"] },
+          { teacher: "SS", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "KM", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "AB", covers: ["3.4"] }
+        ],
+        reserve: ["GPS", "PKS", "KKC", "JD", "NP", "AKG", "SR", "SP", "S.SING", "UM"]
+      },
+      {
+        isoDate: "2026-12-05",
+        date: "05.12.26",
+        day: "SATURDAY",
+        rooms: {
+          "1.5": ["SKB"],
+          "1.11": ["KKC"],
+          "1.12": ["ABG"],
+          "1.13": ["GR"],
+          "1.14": ["S.SING"],
+          "1.15": ["RG"],
+          "1.9": ["S.PAL"],
+          "1.10": ["RKP"],
+          "1.4": ["PKS"],
+          "2.5": ["KM"],
+          "2.7": ["SS"],
+          "3.1": ["DR"],
+          "3.2": ["S.ALI"],
+          "3.7": ["S.PAL"],
+          "3.4": ["NP", "SA"]
+        },
+        relievers: [
+          { teacher: "AKG", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "BS", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "LKR", covers: ["1.9", "1.10"] },
+          { teacher: "SG", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "SR", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "JS", covers: ["3.4"] }
+        ],
+        reserve: ["NB", "GPS", "JD", "AK", "RS", "AM", "KH", "AS", "UM", "AB"]
+      },
+      {
+        isoDate: "2026-12-07",
+        date: "07.12.26",
+        day: "MONDAY",
+        rooms: {
+          "1.5": ["SS"],
+          "1.11": ["S.SING"],
+          "1.12": ["GPS"],
+          "1.13": ["KKC"],
+          "1.14": ["AM"],
+          "1.15": ["JS"],
+          "1.9": ["RS"],
+          "1.10": ["ABG"],
+          "1.4": ["SA"],
+          "2.5": ["S.ALI"],
+          "2.7": ["AS"],
+          "3.1": ["KH"],
+          "3.2": ["GR"],
+          "3.7": ["RKP"],
+          "3.4": ["SKB", "AK"]
+        },
+        relievers: [
+          { teacher: "SR", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "SP", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "NB", covers: ["1.9", "1.10"] },
+          { teacher: "S.PAL", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "RG", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "BS", covers: ["3.4"] }
+        ],
+        reserve: ["KM", "ABG", "PKS", "LKR", "JD", "NP", "AKG", "SG", "DR", "UM"]
+      },
+      {
+        isoDate: "2026-12-08",
+        date: "08.12.26",
+        day: "TUESDAY",
+        rooms: {
+          "1.5": ["SA"],
+          "1.11": ["KM"],
+          "1.12": ["LKR"],
+          "1.13": ["NB"],
+          "1.14": ["AKG"],
+          "1.15": ["PKS"],
+          "1.9": ["RG"],
+          "1.10": ["KH"],
+          "1.4": ["S.ALI"],
+          "2.5": ["SS"],
+          "2.7": ["AB"],
+          "3.1": ["RS"],
+          "3.2": ["SP"],
+          "3.7": ["S.SING"],
+          "3.4": ["ABG", "G", "PS"]
+        },
+        relievers: [
+          { teacher: "SG", covers: ["1.5", "1.11", "1.12"] },
+          { teacher: "DR", covers: ["1.13", "1.14", "1.15"] },
+          { teacher: "SR", covers: ["1.9", "1.10"] },
+          { teacher: "BS", covers: ["1.4", "2.5", "2.7"] },
+          { teacher: "NP", covers: ["3.1", "3.2", "3.7"] },
+          { teacher: "GR", covers: ["3.4"] }
+        ],
+        reserve: ["KKC", "SKB", "RKP", "JD", "JS", "AK", "AM", "S.PAL", "AS", "UM"]
+      },
+      {
+        isoDate: "2026-12-09",
+        date: "09.12.26",
+        day: "WEDNESDAY",
+        rooms: {
+          "1.5": ["GPS"],
+          "1.11": ["S.ALI"],
+          "1.12": ["BS"],
+          "1.13": ["JS"],
+          "1.14": ["NP"],
+          "1.15": ["KKC"],
+          "1.9": ["S.PAL"],
+          "1.10": ["AK"],
+          "1.4": ["AB"],
+          "2.5": ["AS"],
+          "2.7": ["AM"],
+          "3.1": ["SP"],
+          "3.2": ["LKR"],
+          "3.7": ["DR"],
+          "3.4": ["NB", "RG"]
+        },
+        relievers: [],
+        reserve: ["KM", "SS", "ABG", "PKS", "SKB", "RKP", "JD", "SA", "G", "SG", "SR", "GR", "RS", "S.SING", "KH", "UM"]
+      },
+      {
+        isoDate: "2026-12-10",
+        date: "10.12.26",
+        day: "THURSDAY",
+        rooms: {
+          "1.5": ["S.SING"],
+          "1.11": ["SP"],
+          "1.12": ["SKB"],
+          "1.13": ["AM"],
+          "1.14": ["RG"],
+          "1.15": ["S.PAL"],
+          "1.9": ["AKG"],
+          "1.10": ["PKS"],
+          "1.4": ["RKP"],
+          "2.5": ["GPS"],
+          "2.7": ["KM"],
+          "3.1": ["GR"],
+          "3.2": ["AKG"],
+          "3.7": ["AB"],
+          "3.4": ["KH", "SR"]
+        },
+        relievers: [],
+        reserve: ["NB", "SS", "ABG", "KKC", "LKR", "JD", "NP", "JS", "SA", "SG", "S.ALI", "RS", "DR", "AS", "UM", "BS"]
+      }
+    ];
+
+    // State variables
+    let ALL_TEACHERS = [];
+    let selectedTeacher = "";
+    let selectedDateIndex = 0;
+
+    // Storage key
+    const STORAGE_KEY = "mansuka_duty_2026_teacher";
+
+    // Extract & sort all unique teacher initials alphabetically
+    function extractUniqueTeachers() {
+      const set = new Set();
+      DUTY_SCHEDULE.forEach(dayObj => {
+        Object.values(dayObj.rooms).forEach(list => list.forEach(t => set.add(t)));
+        dayObj.relievers.forEach(r => set.add(r.teacher));
+        dayObj.reserve.forEach(t => set.add(t));
+      });
+      ALL_TEACHERS = Array.from(set).sort((a, b) => a.localeCompare(b));
+    }
+
+    // Show non-blocking toast notification
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toast-message");
+      toastMsg.textContent = msg;
+      toast.classList.remove("opacity-0", "translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "translate-y-4");
+      }, 2600);
+    }
+
+    // Switch between 'My Duty' and 'Full Chart' tabs
+    function switchTab(tabName) {
+      const teacherTab = document.getElementById("tab-teacher");
+      const dateTab = document.getElementById("tab-date");
+      const teacherView = document.getElementById("view-teacher");
+      const dateView = document.getElementById("view-date");
+
+      if (tabName === "teacher") {
+        teacherTab.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-indigo-600 text-white shadow-sm";
+        dateTab.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100";
+        teacherView.classList.remove("hidden");
+        dateView.classList.add("hidden");
+      } else {
+        dateTab.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all bg-indigo-600 text-white shadow-sm";
+        teacherTab.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-600 hover:bg-slate-100";
+        dateView.classList.remove("hidden");
+        teacherView.classList.add("hidden");
+        renderDateDetail(selectedDateIndex);
+      }
+    }
+
+    // Populate dropdown and quick-tap chips based on search filter
+    function populateTeacherControls(filterText = "") {
+      const select = document.getElementById("teacher-select");
+      const chipsContainer = document.getElementById("teacher-chips");
+      const countLabel = document.getElementById("teacher-count-label");
+      const query = filterText.trim().toUpperCase();
+
+      const filtered = query
+        ? ALL_TEACHERS.filter(t => t.includes(query))
+        : ALL_TEACHERS;
+
+      // Update Dropdown
+      select.innerHTML = `<option value="">-- Choose Your Initials (${filtered.length} Available) --</option>`;
+      filtered.forEach(teacher => {
+        const opt = document.createElement("option");
+        opt.value = teacher;
+        opt.textContent = teacher;
+        if (teacher === selectedTeacher) opt.selected = true;
+        select.appendChild(opt);
+      });
+
+      // Update Chips
+      countLabel.textContent = `${filtered.length} Teacher${filtered.length === 1 ? "" : "s"}`;
+      if (filtered.length === 0) {
+        chipsContainer.innerHTML = `<span class="text-xs text-rose-500 font-medium py-1">No matching initials found for "${filterText}".</span>`;
+      } else {
+        chipsContainer.innerHTML = filtered.map(teacher => {
+          const isSelected = teacher === selectedTeacher;
+          return `
+            <button
+              type="button"
+              onclick="selectTeacherFromChip('${teacher}')"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isSelected
+                  ? "bg-indigo-600 text-white shadow-sm ring-2 ring-indigo-300"
+                  : "bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 border border-slate-200/80"
+              }"
+            >
+              ${teacher}
+            </button>
+          `;
+        }).join("");
+      }
+    }
+
+    // Handle chip click
+    function selectTeacherFromChip(initials) {
+      document.getElementById("teacher-select").value = initials;
+      handleTeacherChange(initials);
+    }
+
+    // Clear search input
+    function clearSearch() {
+      const searchInput = document.getElementById("teacher-search");
+      searchInput.value = "";
+      document.getElementById("clear-search-btn").classList.add("hidden");
+      populateTeacherControls("");
+      searchInput.focus();
+    }
+
+    // Handle teacher selection change
+    function handleTeacherChange(initials) {
+      selectedTeacher = initials;
+      const savedBadge = document.getElementById("saved-badge");
+      const emptyState = document.getElementById("teacher-empty-state");
+      const dashboard = document.getElementById("teacher-dashboard");
+
+      try {
+        if (initials) {
+          localStorage.setItem(STORAGE_KEY, initials);
+          savedBadge.classList.remove("hidden");
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+          savedBadge.classList.add("hidden");
+        }
+      } catch (e) {
+        // Ignore storage errors in restricted iframes
+      }
+
+      // Refresh chip active state
+      populateTeacherControls(document.getElementById("teacher-search").value);
+
+      if (!initials) {
+        emptyState.classList.remove("hidden");
+        dashboard.classList.add("hidden");
+        return;
+      }
+
+      emptyState.classList.add("hidden");
+      dashboard.classList.remove("hidden");
+      document.getElementById("selected-teacher-title").textContent = initials;
+
+      renderUpcomingBanner(initials);
+      renderTeacherCards();
+    }
+
+    // Compute duties for a specific teacher on a specific day object
+    function getTeacherDutyForDay(teacher, dayObj) {
+      const assignedRooms = [];
+      ROOM_ORDER.forEach(roomNo => {
+        if (dayObj.rooms[roomNo] && dayObj.rooms[roomNo].includes(teacher)) {
+          assignedRooms.push(roomNo);
+        }
+      });
+
+      const relieverAssignments = dayObj.relievers.filter(r => r.teacher === teacher);
+      const isReserve = dayObj.reserve.includes(teacher);
+
+      return {
+        assignedRooms,
+        relieverAssignments,
+        isReserve,
+        hasAnyDuty: assignedRooms.length > 0 || relieverAssignments.length > 0 || isReserve
+      };
+    }
+
+    // Render Today's / Next Exam Day Highlight Banner
+    function renderUpcomingBanner(teacher) {
+      const banner = document.getElementById("upcoming-banner");
+      const now = new Date();
+      // Format local YYYY-MM-DD
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const todayIso = `${yyyy}-${mm}-${dd}`;
+
+      // Check if today is an exam day, otherwise find the next upcoming exam day
+      let targetDay = DUTY_SCHEDULE.find(d => d.isoDate === todayIso);
+      let isToday = true;
+
+      if (!targetDay) {
+        isToday = false;
+        targetDay = DUTY_SCHEDULE.find(d => d.isoDate > todayIso);
+      }
+
+      if (!targetDay) {
+        // All exams completed
+        banner.className = "rounded-2xl p-4 sm:p-5 border bg-slate-100 border-slate-200 text-slate-700";
+        banner.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-200 flex items-center justify-center text-slate-600 shrink-0 font-bold">✓</div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-500">Evaluation Status</div>
+              <div class="text-sm sm:text-base font-bold text-slate-800">All 3rd Summative Evaluation duty dates have concluded.</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const duty = getTeacherDutyForDay(teacher, targetDay);
+      const labelPrefix = isToday ? "TODAY'S DUTY (আজকের ডিউটি)" : "NEXT EXAM DAY (পরবর্তী পরীক্ষার দিন)";
+
+      if (duty.hasAnyDuty) {
+        const parts = [];
+        if (duty.assignedRooms.length > 0) {
+          parts.push(`Room Invigilation: <strong class="underline decoration-2">Room ${duty.assignedRooms.join(", ")}</strong>`);
+        }
+        if (duty.relieverAssignments.length > 0) {
+          const cov = duty.relieverAssignments.map(r => `Rooms ${r.covers.join(", ")}`).join(" & ");
+          parts.push(`Reliever (40m): <strong>${cov}</strong>`);
+        }
+        if (duty.isReserve) {
+          parts.push(`<strong>Reserve / Q. Setter</strong>`);
+        }
+
+        banner.className = "rounded-2xl p-4 sm:p-5 border bg-gradient-to-r from-amber-50 to-orange-50 border-amber-300 shadow-sm";
+        banner.innerHTML = `
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-900">
+                  ${labelPrefix}
+                </span>
+                <span class="text-xs font-bold text-slate-700">${targetDay.date} (${targetDay.day})</span>
+              </div>
+              <div class="text-sm sm:text-base text-slate-900 mt-1.5 leading-relaxed">
+                <span class="font-bold text-indigo-900">${teacher}</span> — ${parts.join(" &nbsp;•&nbsp; ")}
+              </div>
+              <div class="text-xs text-slate-600 mt-1">Reporting Time: <strong>11:30 AM</strong></div>
+            </div>
+          </div>
+        `;
+      } else {
+        banner.className = "rounded-2xl p-4 sm:p-5 border bg-emerald-50/80 border-emerald-200 shadow-sm";
+        banner.innerHTML = `
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-600/15 text-emerald-900">
+                  ${labelPrefix}
+                </span>
+                <span class="text-xs font-bold text-slate-700">${targetDay.date} (${targetDay.day})</span>
+              </div>
+              <div class="text-sm sm:text-base font-bold text-emerald-950 mt-1">
+                No Invigilation Duty assigned to <span class="underline">${teacher}</span> on ${targetDay.date}.
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Render all 9 chronological cards + update counters
+    function renderTeacherCards() {
+      if (!selectedTeacher) return;
+
+      const listContainer = document.getElementById("duty-cards-list");
+      const hideFreeDays = document.getElementById("only-duty-toggle").checked;
+
+      let roomCount = 0;
+      let relieverCount = 0;
+      let reserveCount = 0;
+
+      const cardsHtml = [];
+
+      DUTY_SCHEDULE.forEach(dayObj => {
+        const duty = getTeacherDutyForDay(selectedTeacher, dayObj);
+
+        if (duty.assignedRooms.length > 0) roomCount += duty.assignedRooms.length;
+        if (duty.relieverAssignments.length > 0) relieverCount += duty.relieverAssignments.length;
+        if (duty.isReserve) reserveCount += 1;
+
+        if (hideFreeDays && !duty.hasAnyDuty) return;
+
+        // Build duty badges & details inside card
+        let badgesHtml = "";
+        let detailsHtml = "";
+
+        if (!duty.hasAnyDuty) {
+          badgesHtml = `
+            <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+              No Duty / Free
+            </span>
+          `;
+        } else {
+          const badgeList = [];
+          const detailLines = [];
+
+          // 1. Room Invigilation
+          if (duty.assignedRooms.length > 0) {
+            duty.assignedRooms.forEach(roomNo => {
+              const coTeachers = (dayObj.rooms[roomNo] || []).filter(t => t !== selectedTeacher);
+              badgeList.push(`
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs sm:text-sm font-extrabold bg-blue-600 text-white shadow-xs">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                  Room ${roomNo}
+                </span>
+              `);
+              if (coTeachers.length > 0) {
+                detailLines.push(`
+                  <div class="text-xs text-blue-900 bg-blue-50/70 px-3 py-1.5 rounded-lg border border-blue-100 flex items-center gap-1.5">
+                    <span class="font-semibold">Co-Invigilator in Room ${roomNo}:</span>
+                    <span class="font-bold">${coTeachers.join(", ")}</span>
+                  </div>
+                `);
+              }
+            });
+          }
+
+          // 2. Reliever Duty
+          if (duty.relieverAssignments.length > 0) {
+            duty.relieverAssignments.forEach(rel => {
+              badgeList.push(`
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs sm:text-sm font-extrabold bg-amber-500 text-white shadow-xs">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  Reliever (40m)
+                </span>
+              `);
+              detailLines.push(`
+                <div class="text-xs text-amber-950 bg-amber-50 px-3 py-2 rounded-lg border border-amber-200/80 flex flex-wrap items-center gap-1.5">
+                  <span class="font-semibold">Covers Rooms:</span>
+                  ${rel.covers.map(r => `<span class="px-2 py-0.5 bg-white border border-amber-300 rounded font-extrabold text-amber-900">${r}</span>`).join("")}
+                  <span class="text-amber-700 ml-auto font-medium">(40 Mins Duty)</span>
+                </div>
+              `);
+            });
+          }
+
+          // 3. Reserve / Q. Setter
+          if (duty.isReserve) {
+            badgeList.push(`
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs sm:text-sm font-bold bg-purple-600 text-white shadow-xs">
+                Reserve / Q. Setter
+              </span>
+            `);
+            if (duty.assignedRooms.length === 0 && duty.relieverAssignments.length === 0) {
+              detailLines.push(`
+                <div class="text-xs text-purple-900 bg-purple-50/70 px-3 py-1.5 rounded-lg border border-purple-100">
+                  Report to Exam Control Room at <strong>11:30 AM</strong> for Reserve / Question Setter duty.
+                </div>
+              `);
+            }
+          }
+
+          badgesHtml = `<div class="flex flex-wrap items-center gap-2">${badgeList.join("")}</div>`;
+          detailsHtml = detailLines.length > 0 ? `<div class="mt-2.5 space-y-1.5">${detailLines.join("")}</div>` : "";
+        }
+
+        cardsHtml.push(`
+          <div class="rounded-2xl p-4 border transition-all print-shadow-none ${
+            duty.hasAnyDuty
+              ? "bg-white border-slate-200/90 shadow-xs"
+              : "bg-slate-50/70 border-slate-200/60 opacity-80"
+          }">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl flex flex-col items-center justify-center shrink-0 font-extrabold border ${
+                  duty.hasAnyDuty
+                    ? "bg-indigo-50 text-indigo-900 border-indigo-200"
+                    : "bg-slate-100 text-slate-500 border-slate-200"
+                }">
+                  <span class="text-sm leading-none">${dayObj.date.split(".")[0]}</span>
+                  <span class="text-[10px] uppercase tracking-wider mt-0.5 opacity-80">${dayObj.date.split(".")[1] === "11" ? "NOV" : "DEC"}</span>
+                </div>
+                <div>
+                  <div class="text-sm sm:text-base font-extrabold text-slate-900">${dayObj.date}</div>
+                  <div class="text-xs font-semibold text-slate-500 tracking-wide">${dayObj.day}</div>
+                </div>
+              </div>
+              <div>
+                ${badgesHtml}
+              </div>
+            </div>
+            ${detailsHtml}
+          </div>
+        `);
+      });
+
+      document.getElementById("stat-room").textContent = roomCount;
+      document.getElementById("stat-reliever").textContent = relieverCount;
+      document.getElementById("stat-reserve").textContent = reserveCount;
+
+      if (cardsHtml.length === 0) {
+        listContainer.innerHTML = `
+          <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 text-sm text-slate-500">
+            No duties found with the current filter.
+          </div>
+        `;
+      } else {
+        listContainer.innerHTML = cardsHtml.join("");
+      }
+    }
+
+    // Generate clean shareable text summary for selected teacher
+    function generateShareText(teacher) {
+      const lines = [
+        `*MANSUKA L. N. HIGH SCHOOL (H.S.)*`,
+        `3rd Summative Evaluation – 2026`,
+        `Invigilator Duty Chart: *${teacher}*`,
+        `Time: 11:30 AM – 02:30 PM`,
+        `------------------------------`
+      ];
+
+      DUTY_SCHEDULE.forEach(dayObj => {
+        const duty = getTeacherDutyForDay(teacher, dayObj);
+        if (!duty.hasAnyDuty) return;
+
+        const roles = [];
+        if (duty.assignedRooms.length > 0) {
+          roles.push(`Room ${duty.assignedRooms.join(", ")}`);
+        }
+        if (duty.relieverAssignments.length > 0) {
+          duty.relieverAssignments.forEach(r => {
+            roles.push(`Reliever [Rooms: ${r.covers.join(", ")}]`);
+          });
+        }
+        if (duty.isReserve) {
+          roles.push(`Reserve / Q. Setter`);
+        }
+
+        lines.push(`📅 *${dayObj.date}* (${dayObj.day.slice(0, 3)}): ${roles.join(" + ")}`);
+      });
+
+      lines.push(`------------------------------`);
+      lines.push(`_All Reliever Duty Time: 40 Mins_`);
+      return lines.join("\n");
+    }
+
+    // Share directly to WhatsApp
+    function shareOnWhatsApp() {
+      if (!selectedTeacher) return;
+      const text = generateShareText(selectedTeacher);
+      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    // Copy schedule using fallback textarea + execCommand
+    function copyTeacherSchedule() {
+      if (!selectedTeacher) return;
+      const text = generateShareText(selectedTeacher).replace(/\*/g, "").replace(/_/g, "");
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(`Duty schedule for ${selectedTeacher} copied!`);
+      } catch (err) {
+        showToast("Unable to copy automatically.");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // =========================================================
+    // DATE-WISE FULL CHART LOGIC
+    // =========================================================
+    function initDatePills() {
+      const container = document.getElementById("date-pills");
+      container.innerHTML = DUTY_SCHEDULE.map((d, idx) => `
+        <button
+          type="button"
+          id="date-pill-${idx}"
+          onclick="selectDateTab(${idx})"
+          class="shrink-0 px-3.5 py-2 rounded-xl border text-left transition-all ${
+            idx === selectedDateIndex
+              ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
+              : "bg-slate-50 hover:bg-indigo-50 text-slate-700 border-slate-200"
+          }"
+        >
+          <div class="text-xs font-extrabold">${d.date}</div>
+          <div class="text-[10px] font-medium opacity-85">${d.day.slice(0, 3)}</div>
+        </button>
+      `).join("");
+    }
+
+    function selectDateTab(idx) {
+      selectedDateIndex = idx;
+      initDatePills();
+      renderDateDetail(idx);
+    }
+
+    function renderDateDetail(idx) {
+      const dayObj = DUTY_SCHEDULE[idx];
+      const container = document.getElementById("date-detail-container");
+
+      // 1. Room-wise Invigilators Grid
+      const roomCards = ROOM_ORDER.map(roomNo => {
+        const teachers = dayObj.rooms[roomNo] || [];
+        return `
+          <div class="bg-slate-50 border border-slate-200/90 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 uppercase">Room <strong class="text-sm text-indigo-950 ml-0.5">${roomNo}</strong></span>
+            <span class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs sm:text-sm font-extrabold text-slate-900 shadow-2xs">
+              ${teachers.join(" + ")}
+            </span>
+          </div>
+        `;
+      }).join("");
+
+      // 2. Relievers Section
+      const relieverHtml = dayObj.relievers.length > 0
+        ? `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            ${dayObj.relievers.map(r => `
+              <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3 flex items-center justify-between gap-2">
+                <div>
+                  <div class="text-[11px] font-semibold text-amber-800">Reliever (40m)</div>
+                  <div class="text-sm font-extrabold text-amber-950">${r.teacher}</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-[10px] font-semibold text-amber-700 uppercase">Covers Rooms</div>
+                  <div class="text-xs font-bold text-slate-900 mt-0.5">${r.covers.join(", ")}</div>
+                </div>
+              </div>
+            `).join("")}
+          </div>`
+        : `<div class="text-xs font-medium text-slate-500 bg-slate-50 border border-slate-200 rounded-xl p-3">
+            No separate Reliever duty assigned on ${dayObj.date} (Blank in official chart).
+          </div>`;
+
+      // 3. Reserve / Q. Setter Section
+      const reserveHtml = `
+        <div class="flex flex-wrap gap-1.5">
+          ${dayObj.reserve.map(t => `
+            <span class="px-2.5 py-1 rounded-lg bg-purple-50 border border-purple-200 text-purple-950 text-xs font-bold">
+              ${t}
+            </span>
+          `).join("")}
+        </div>
+      `;
+
+      container.innerHTML = `
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 space-y-5 print-shadow-none">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Date-wise Master Chart</span>
+              <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">${dayObj.date} — ${dayObj.day}</h3>
+            </div>
+            <span class="text-xs font-semibold bg-indigo-50 text-indigo-800 px-3 py-1 rounded-lg border border-indigo-100">
+              11:30 AM – 02:30 PM
+            </span>
+          </div>
+
+          <!-- Room Assignments -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
+              Room Invigilators (15 Rooms)
+            </h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+              ${roomCards}
+            </div>
+          </div>
+
+          <!-- Relievers -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-700 mb-2.5">
+              Reliever Duty (40 Minutes)
+            </h4>
+            ${relieverHtml}
+          </div>
+
+          <!-- Reserve / Q. Setter -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2.5">
+              Reserve / Q. Setter (${dayObj.reserve.length} Teachers)
+            </h4>
+            ${reserveHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize Application on Load
+    window.addEventListener("DOMContentLoaded", () => {
+      extractUniqueTeachers();
+      populateTeacherControls("");
+      initDatePills();
+
+      // Attach live search listener
+      const searchInput = document.getElementById("teacher-search");
+      const clearBtn = document.getElementById("clear-search-btn");
+
+      searchInput.addEventListener("input", (e) => {
+        const val = e.target.value;
+        if (val.trim().length > 0) {
+          clearBtn.classList.remove("hidden");
+        } else {
+          clearBtn.classList.add("hidden");
+        }
+        populateTeacherControls(val);
+
+        // Auto-select if exact match typed
+        const upper = val.trim().toUpperCase();
+        if (ALL_TEACHERS.includes(upper)) {
+          document.getElementById("teacher-select").value = upper;
+          handleTeacherChange(upper);
+        }
+      });
+
+      // Restore saved teacher from localStorage if available
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved && ALL_TEACHERS.includes(saved)) {
+          document.getElementById("teacher-select").value = saved;
+          handleTeacherChange(saved);
+        }
+      } catch (e) {
+        // Ignore storage restrictions
+      }
+    });
+  </script>
+</body>
+</html>
